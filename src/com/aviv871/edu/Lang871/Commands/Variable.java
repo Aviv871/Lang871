@@ -1,6 +1,6 @@
-package com.aviv871games.learn.Lang871.Commands;
+package com.aviv871.edu.Lang871.Commands;
 
-import com.aviv871games.learn.Lang871.Utilities.Math;
+import com.aviv871.edu.Lang871.Utilities.Math;
 
 import java.util.HashMap;
 import java.util.Set;

@@ -1,6 +1,6 @@
-package com.aviv871games.learn.Lang871.Utilities;
+package com.aviv871.edu.Lang871.Utilities;
 
-import com.aviv871games.learn.Lang871.Commands.Variable;
+import com.aviv871.edu.Lang871.Commands.Variable;
 
 public class Math
 {

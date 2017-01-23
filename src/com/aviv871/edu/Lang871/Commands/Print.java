@@ -1,4 +1,4 @@
-package com.aviv871games.learn.Lang871.Commands;
+package com.aviv871.edu.Lang871.Commands;
 
 public class Print implements ICommand
 {

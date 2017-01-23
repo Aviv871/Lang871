@@ -1,6 +1,6 @@
-package com.aviv871games.learn.Lang871.References;
+package com.aviv871.edu.Lang871.References;
 
-import com.aviv871games.learn.Lang871.Commands.*;
+import com.aviv871.edu.Lang871.Commands.*;
 
 public enum LangKeyWords
 {

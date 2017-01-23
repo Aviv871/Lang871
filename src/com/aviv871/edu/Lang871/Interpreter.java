@@ -1,7 +1,7 @@
-package com.aviv871games.learn.Lang871;
+package com.aviv871.edu.Lang871;
 
-import com.aviv871games.learn.Lang871.Commands.Variable;
-import com.aviv871games.learn.Lang871.References.LangKeyWords;
+import com.aviv871.edu.Lang871.Commands.Variable;
+import com.aviv871.edu.Lang871.References.LangKeyWords;
 
 import java.util.List;
 

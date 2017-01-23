@@ -1,4 +1,4 @@
-package com.aviv871games.learn.Lang871;
+package com.aviv871.edu.Lang871;
 
 import java.io.BufferedReader;
 import java.io.File;
