@@ -1,5 +1,7 @@
 package com.aviv871.edu.Lang871.Commands;
 
+import com.aviv871.edu.Lang871.UI.Console;
+
 public class Print implements ICommand
 {
     private static final String code871 = "הדפס";
@@ -12,7 +14,7 @@ public class Print implements ICommand
 
     private void initiateCommand(String val)
     {
-        System.out.println(val);
+        Console.println(val);
     }
 
     @Override

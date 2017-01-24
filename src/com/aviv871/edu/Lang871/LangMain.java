@@ -1,25 +1,20 @@
 package com.aviv871.edu.Lang871;
 
+import com.aviv871.edu.Lang871.UI.GUIManager;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class LangMain
 {
+    private static File code;
+
     public static void main(String[] args)
     {
-        Scanner s = new Scanner(System.in);
-
-        System.out.print("Enter the 871-code file name: ");
-        String fileName = s.nextLine();
-        System.out.println();
-        if(fileName.endsWith(".871"))
-            Interpreter.sendCodeToInterpret(readFile(new File(fileName)));
-        else
-            Interpreter.sendCodeToInterpret(readFile(new File(fileName + ".871")));
+        GUIManager.openGUI(); // TODO: Replace all runtime exceptions with error log to the gui
     }
 
     private static List<String> readFile(File file)
@@ -42,5 +37,15 @@ public class LangMain
             e.printStackTrace();
             return null;
         }
+    }
+
+    public static void interpretFile()
+    {
+        Interpreter.sendCodeToInterpret(readFile(code));
+    }
+
+    public static void setCodeFile(File file)
+    {
+        code = file;
     }
 }

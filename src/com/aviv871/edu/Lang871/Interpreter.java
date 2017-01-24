@@ -2,6 +2,7 @@ package com.aviv871.edu.Lang871;
 
 import com.aviv871.edu.Lang871.Commands.Variable;
 import com.aviv871.edu.Lang871.References.LangKeyWords;
+import com.aviv871.edu.Lang871.UI.Console;
 
 import java.util.List;
 
@@ -19,7 +20,8 @@ public class Interpreter
             initiateLine(line, currentLineNumber);
         }
 
-        System.out.println(Variable.variables); // For debugging only!
+        Console.println();
+        Console.println(Variable.variables.toString()); // For debugging only!
     }
 
     private static boolean isLineEmpty(String line)
