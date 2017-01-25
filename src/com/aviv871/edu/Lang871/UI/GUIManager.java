@@ -4,6 +4,9 @@ import javax.swing.*;
 
 public class GUIManager
 {
+    public static Console consoleInstance =  new Console();
+    public static CodeEditor codeEditorInstance = new CodeEditor();
+
     public static void openGUI()
     {
         SwingUtilities.invokeLater(new Runnable() {

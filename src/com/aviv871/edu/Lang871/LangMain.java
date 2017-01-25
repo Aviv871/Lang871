@@ -18,6 +18,6 @@ public class LangMain
 
     public static void interpretFile()
     {
-        Interpreter.sendCodeToInterpret(CodeEditor.getTheCode());
+        Interpreter.sendCodeToInterpret(GUIManager.codeEditorInstance.getTheCode());
     }
 }

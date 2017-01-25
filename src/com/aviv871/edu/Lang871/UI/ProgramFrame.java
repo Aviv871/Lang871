@@ -30,11 +30,11 @@ public class ProgramFrame extends JFrame
         consoleArea = new JTextPane();
         consoleArea.setEditable(false);
         consoleArea.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
-        Console.setTextArea(consoleArea);
+        GUIManager.consoleInstance.setTextArea(consoleArea);
 
         codeArea = new JTextPane();
         codeArea.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
-        CodeEditor.setTextArea(codeArea);
+        GUIManager.codeEditorInstance.setTextArea(codeArea);
 
         // Creates the GUI
         setLayout(new GridBagLayout());
@@ -108,7 +108,7 @@ public class ProgramFrame extends JFrame
             @Override
             public void actionPerformed(ActionEvent evt) {
                 clearTheTextArea(codeArea);
-                CodeEditor.loadCodeFile(openFile());
+                GUIManager.codeEditorInstance.loadCodeFile(openFile());
             }
         });
 
@@ -116,7 +116,7 @@ public class ProgramFrame extends JFrame
         buttonSave.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
-                CodeEditor.saveFile();
+                GUIManager.codeEditorInstance.saveFile();
             }
         });
 
@@ -124,7 +124,7 @@ public class ProgramFrame extends JFrame
         buttonSaveAs.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
-                CodeEditor.saveFileAs();
+                GUIManager.codeEditorInstance.saveFileAs();
             }
         });
 

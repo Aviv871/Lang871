@@ -2,6 +2,7 @@ package com.aviv871.edu.Lang871.Commands;
 
 import com.aviv871.edu.Lang871.Interpreter;
 import com.aviv871.edu.Lang871.UI.Console;
+import com.aviv871.edu.Lang871.UI.GUIManager;
 import com.aviv871.edu.Lang871.Utilities.Math;
 
 public class If implements ICommand
@@ -19,7 +20,7 @@ public class If implements ICommand
     {
         while(par.endsWith(" ")) par = par.substring(0, par.length()-1); // Removing whitespaces in the end of the line
 
-        if(!par.contains(" אז ")) Console.printErrorMessage("שגיאה עם הפרמטרים של הפקודה, חסר 'אז' בשורה: " + lineNumber);
+        if(!par.contains(" אז ")) GUIManager.consoleInstance.printErrorMessage("שגיאה עם הפרמטרים של הפקודה, חסר 'אז' בשורה: " + lineNumber);
         String condition = par.substring(0, par.indexOf(" אז "));
         String command = par.substring(par.indexOf(" אז ") + 4);
 
@@ -51,7 +52,7 @@ public class If implements ICommand
         }
         else
         {
-            Console.printErrorMessage("שגיאה עם הפרמטרים של הפקודה, השואה לא חוקית בשורה: " + lineNumber);
+            GUIManager.consoleInstance.printErrorMessage("שגיאה עם הפרמטרים של הפקודה, השואה לא חוקית בשורה: " + lineNumber);
         }
 
         startPosition = currentPosition;
@@ -70,7 +71,7 @@ public class If implements ICommand
         }
         else
         {
-            Console.printErrorMessage("שגיאה עם הפרמטרים של הפקודה, השוואה לא חוקית בשורה: " + lineNumber);
+            GUIManager.consoleInstance.printErrorMessage("שגיאה עם הפרמטרים של הפקודה, השוואה לא חוקית בשורה: " + lineNumber);
         }
 
         startPosition = currentPosition;
@@ -92,7 +93,7 @@ public class If implements ICommand
         }
         else
         {
-            Console.printErrorMessage("שגיאה עם הפרמטרים של הפקודה, השוואה לא חוקית בשורה: " + lineNumber);
+            GUIManager.consoleInstance.printErrorMessage("שגיאה עם הפרמטרים של הפקודה, השוואה לא חוקית בשורה: " + lineNumber);
         }
 
         value1 = Math.evaluateArithmeticFromString(par1, lineNumber);
@@ -112,7 +113,7 @@ public class If implements ICommand
             case ">=":
                 return value1 >= value2;
             default:
-                Console.printErrorMessage("שגיאה עם הפרמטרים של הפקודה, השוואה לא חוקית בשורה: " + lineNumber);
+                GUIManager.consoleInstance.printErrorMessage("שגיאה עם הפרמטרים של הפקודה, השוואה לא חוקית בשורה: " + lineNumber);
                 return false;
         }
 
