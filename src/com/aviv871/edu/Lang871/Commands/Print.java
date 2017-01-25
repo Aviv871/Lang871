@@ -55,7 +55,7 @@ public class Print implements ICommand
                 }
             }
 
-            throw new RuntimeException("Error with command parameters in line: " + line);
+            Console.printErrorMessage("שגיאה עם הפרמטרים של הפקודה בשורה: " + line);
         }
     }
 }

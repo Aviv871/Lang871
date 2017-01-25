@@ -1,5 +1,6 @@
 package com.aviv871.edu.Lang871.Commands;
 
+import com.aviv871.edu.Lang871.UI.Console;
 import com.aviv871.edu.Lang871.Utilities.Math;
 
 import java.util.HashMap;
@@ -28,10 +29,10 @@ public class Variable implements ICommand
         {
             if(c == '=') eqCounter++;
         }
-        if(eqCounter == 0) throw new RuntimeException("Error with command parameters, missing '=', in line: " + line); // Make sure there is at least one '='
+        if(eqCounter == 0) Console.printErrorMessage("שגיאה עם הפרמטרים של הפקודה, חסר '=' בשורה: " + line); // Make sure there is at least one '='
         String varName = par.substring(0, par.indexOf("="));
         String varValue = par.substring(par.indexOf("=") + 1);
-        if(!isVariableNameValid(varName)) throw new RuntimeException("Error with command parameters, non-valid variable name, in line: " + line); // Make sure there is at least one '='
+        if(!isVariableNameValid(varName)) Console.printErrorMessage("שגיאה עם הפרמטקים של הפקודה, שם משתנה לא חוקי בשורה: " + line); // Make sure there is at least one '='
 
 
 

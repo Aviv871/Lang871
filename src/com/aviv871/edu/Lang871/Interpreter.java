@@ -20,8 +20,7 @@ public class Interpreter
             initiateLine(line, currentLineNumber);
         }
 
-        Console.println();
-        Console.println(Variable.variables.toString()); // For debugging only!
+        Console.printLogMessage("\n" + "משתנים:" + "\n" + Variable.variables.toString()); // For debugging only!
     }
 
     private static boolean isLineEmpty(String line)
@@ -56,6 +55,6 @@ public class Interpreter
             }
         }
 
-        throw new RuntimeException("Error with command in line: " + lineNumber);
+        Console.printErrorMessage("שגיאה עם הפקודה בשורה: " + lineNumber);
     }
 }

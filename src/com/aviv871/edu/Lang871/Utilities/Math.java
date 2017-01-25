@@ -1,6 +1,7 @@
 package com.aviv871.edu.Lang871.Utilities;
 
 import com.aviv871.edu.Lang871.Commands.Variable;
+import com.aviv871.edu.Lang871.UI.Console;
 
 public class Math
 {
@@ -36,7 +37,7 @@ public class Math
             {
                 nextChar();
                 double x = parseExpression();
-                if(currentPosition < str.length()) throw new RuntimeException("Error with command parameters, Unexpected char: " + (char) currentChar + " - in line " + lineNumber);
+                if(currentPosition < str.length()) Console.printErrorMessage("שגיאה עם הפרמטרים של הפקודה, תו לא במקום: " + (char) currentChar + " - בשורה " + lineNumber);
                 return x;
             }
 
@@ -72,7 +73,7 @@ public class Math
                 if(dealWithChar('+')) return parseFactor(); // Unary plus
                 if(dealWithChar('-')) return -parseFactor(); // Unary minus
 
-                double x;
+                double x = 0;
                 int startPos = this.currentPosition;
                 if(dealWithChar('(')) // Parentheses
                 {
@@ -93,7 +94,7 @@ public class Math
                     {
                         if(func.equals(varName))
                         {
-                            if(Variable.getAVariableValue(func) instanceof Boolean || Variable.getAVariableValue(func) instanceof String) throw new RuntimeException("Error with variable value, the variable:" + func + " - in line " + lineNumber);
+                            if(Variable.getAVariableValue(func) instanceof Boolean || Variable.getAVariableValue(func) instanceof String) Console.printErrorMessage("שגיאה בסוג המשתנה במשתנה: " + func + " - בשורה " + lineNumber);
                             x = Double.parseDouble(Variable.getAVariableValue(func).toString());
                             return x;
                         }
@@ -104,11 +105,11 @@ public class Math
                     else if (func.equals("סינוס")) x = java.lang.Math.sin(java.lang.Math.toRadians(x));
                     else if (func.equals("קוסינוס")) x = java.lang.Math.cos(java.lang.Math.toRadians(x));
                     else if (func.equals("טנגנס")) x = java.lang.Math.tan(java.lang.Math.toRadians(x));
-                    else throw new RuntimeException("Error with command parameters, Unknown function: " + func + " - in line " + lineNumber);
+                    else Console.printErrorMessage("שגיאה עם הפרמטרים של הפקודה, פונקציה לא ידועה: " + func + " - בשורה " + lineNumber);
                 }
                 else
                 {
-                    throw new RuntimeException("Error with command parameters, Unexpected char: " + (char) currentChar + " - in line " + lineNumber);
+                    Console.printErrorMessage("שגיאה עם הפרמטרים של הפקודה, תו לא במקום: " + (char) currentChar + " - בשורה " + lineNumber);
                 }
 
                 if (dealWithChar('^')) x = java.lang.Math.pow(x, parseFactor()); // Exponentiation

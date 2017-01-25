@@ -1,6 +1,7 @@
 package com.aviv871.edu.Lang871.Commands;
 
 import com.aviv871.edu.Lang871.Interpreter;
+import com.aviv871.edu.Lang871.UI.Console;
 import com.aviv871.edu.Lang871.Utilities.Math;
 
 public class If implements ICommand
@@ -18,7 +19,7 @@ public class If implements ICommand
     {
         while(par.endsWith(" ")) par = par.substring(0, par.length()-1); // Removing whitespaces in the end of the line
 
-        if(!par.contains(" אז ")) throw new RuntimeException("Error with command parameters, missing 'אז', in line: " + lineNumber);
+        if(!par.contains(" אז ")) Console.printErrorMessage("שגיאה עם הפרמטרים של הפקודה, חסר 'אז' בשורה: " + lineNumber);
         String condition = par.substring(0, par.indexOf(" אז "));
         String command = par.substring(par.indexOf(" אז ") + 4);
 
@@ -28,7 +29,7 @@ public class If implements ICommand
     private boolean checkStringCondition(String con, int lineNumber)
     {
         con = con.replaceAll("\\s",""); // Remove all whitespaces
-        String par1, par2, compareType;
+        String par1 = "", par2 = "", compareType = "";
         double value1, value2;
         char currentChar = con.charAt(0);
         short currentPosition = 0, startPosition = 0;
@@ -50,7 +51,7 @@ public class If implements ICommand
         }
         else
         {
-            throw new RuntimeException("Error with command parameters, non-valid comparison, in line: " + lineNumber);
+            Console.printErrorMessage("שגיאה עם הפרמטרים של הפקודה, השואה לא חוקית בשורה: " + lineNumber);
         }
 
         startPosition = currentPosition;
@@ -69,7 +70,7 @@ public class If implements ICommand
         }
         else
         {
-            throw new RuntimeException("Error with command parameters, non-valid comparison, in line: " + lineNumber);
+            Console.printErrorMessage("שגיאה עם הפרמטרים של הפקודה, השוואה לא חוקית בשורה: " + lineNumber);
         }
 
         startPosition = currentPosition;
@@ -91,7 +92,7 @@ public class If implements ICommand
         }
         else
         {
-            throw new RuntimeException("Error with command parameters, non-valid comparison, in line: " + lineNumber);
+            Console.printErrorMessage("שגיאה עם הפרמטרים של הפקודה, השוואה לא חוקית בשורה: " + lineNumber);
         }
 
         value1 = Math.evaluateArithmeticFromString(par1, lineNumber);
@@ -111,7 +112,8 @@ public class If implements ICommand
             case ">=":
                 return value1 >= value2;
             default:
-                throw new RuntimeException("Error with command parameters, non-valid comparison, in line: " + lineNumber);
+                Console.printErrorMessage("שגיאה עם הפרמטרים של הפקודה, השוואה לא חוקית בשורה: " + lineNumber);
+                return false;
         }
 
         // TODO: Add string and boolean comparison or single boolean variable

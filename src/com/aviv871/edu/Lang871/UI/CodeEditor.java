@@ -1,6 +1,11 @@
 package com.aviv871.edu.Lang871.UI;
 
 import javax.swing.*;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.Style;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
+import java.awt.*;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -8,12 +13,17 @@ import java.util.List;
 
 public class CodeEditor
 {
-    private static JTextArea code;
+    private static JTextPane code;
+    private static Style style;
+    private static StyledDocument doc;
+
     private static File codeFile;
 
-    public static void setTextArea(JTextArea textArea)
+    public static void setTextArea(JTextPane textArea)
     {
         code = textArea;
+        style = code.addStyle("Style871", null);
+        doc = code.getStyledDocument();
     }
 
     public static void loadCodeFile(File file)
@@ -23,7 +33,7 @@ public class CodeEditor
         List<String> codeList = readFile(codeFile);
         for(String line: codeList)
         {
-            code.append(line + "\n");
+            appendToPane(line + "\n", Color.black);
         }
     }
 
@@ -49,7 +59,7 @@ public class CodeEditor
         }
         catch (Exception e)
         {
-            System.err.format("Exception occurred trying to read '%s'.", file.getName());
+            Console.printErrorMessage("שגיאה במהלך הניסיון לקרוא את הקובץ קוד");
             e.printStackTrace();
             return null;
         }
@@ -70,7 +80,8 @@ public class CodeEditor
             }
             catch(IOException e)
             {
-                // Do something  TODO: Display error massage
+                Console.printErrorMessage("שגיאה במהלך הניסיון לשמור את קובץ הקוד");
+                e.printStackTrace();
             }
         }
         else
@@ -97,8 +108,23 @@ public class CodeEditor
             }
             catch(IOException e)
             {
-                // Do something  TODO: Display error massage
+                Console.printErrorMessage("שגיאה במהלך הניסיון לקרוא את הקובץ קוד");
+                e.printStackTrace();
             }
+        }
+    }
+
+    private static void appendToPane(String msg, Color c)
+    {
+        StyleConstants.setForeground(style, c);
+
+        try
+        {
+            doc.insertString(doc.getLength(), msg, style);
+        }
+        catch (BadLocationException e)
+        {
+            Console.printErrorMessage("שגיאה במהלך הניסיון להדפיס למסך");
         }
     }
 }

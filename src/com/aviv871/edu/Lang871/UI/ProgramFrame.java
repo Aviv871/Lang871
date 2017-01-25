@@ -11,8 +11,8 @@ import java.io.File;
 
 public class ProgramFrame extends JFrame
 {
-    private static JTextArea consoleArea;
-    private static JTextArea codeArea;
+    private static JTextPane consoleArea;
+    private static JTextPane codeArea;
 
     private static JButton buttonStart = new JButton("הרץ קוד");
     private static JButton buttonClear = new JButton("נקה פלט");
@@ -27,12 +27,12 @@ public class ProgramFrame extends JFrame
     {
         super("Lang871 Interpreter");
 
-        consoleArea = new JTextArea(50, 10);
+        consoleArea = new JTextPane();
         consoleArea.setEditable(false);
         consoleArea.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
         Console.setTextArea(consoleArea);
 
-        codeArea = new JTextArea(50, 10);
+        codeArea = new JTextPane();
         codeArea.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
         CodeEditor.setTextArea(codeArea);
 
@@ -71,16 +71,20 @@ public class ProgramFrame extends JFrame
         add(consoleHead, constraints);
 
         // Scroll
+        JScrollPane scrollPane = new JScrollPane(codeArea);
+        scrollPane.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
         constraints.gridx = 0;
         constraints.gridy = 2;
         constraints.gridwidth = 2;
         constraints.fill = GridBagConstraints.BOTH;
         constraints.weightx = 1;
         constraints.weighty = 1;
-        add(new JScrollPane(codeArea), constraints);
+        add(scrollPane, constraints);
 
+        scrollPane = new JScrollPane(consoleArea);
+        scrollPane.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
         constraints.gridy = 3;
-        add(new JScrollPane(consoleArea), constraints);
+        add(scrollPane, constraints);
 
         // Adds event handler for the Start button
         buttonStart.addActionListener(new ActionListener() {
@@ -108,7 +112,7 @@ public class ProgramFrame extends JFrame
             }
         });
 
-        // Adds event handler for the Load button
+        // Adds event handler for the Save button
         buttonSave.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
@@ -116,7 +120,7 @@ public class ProgramFrame extends JFrame
             }
         });
 
-        // Adds event handler for the Load button
+        // Adds event handler for the Save-As button
         buttonSaveAs.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
@@ -129,7 +133,7 @@ public class ProgramFrame extends JFrame
         setLocationRelativeTo(null);    // centers on screen
     }
 
-    private static void clearTheTextArea(JTextArea area)
+    private static void clearTheTextArea(JTextPane area)
     {
         try
         {
