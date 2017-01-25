@@ -1,6 +1,5 @@
 package com.aviv871.edu.Lang871.Commands;
 
-import com.aviv871.edu.Lang871.UI.Console;
 import com.aviv871.edu.Lang871.UI.GUIManager;
 import com.aviv871.edu.Lang871.Utilities.Math;
 
@@ -30,10 +29,10 @@ public class Variable implements ICommand
         {
             if(c == '=') eqCounter++;
         }
-        if(eqCounter == 0) GUIManager.consoleInstance.printErrorMessage("שגיאה עם הפרמטרים של הפקודה, חסר '=' בשורה: " + line); // Make sure there is at least one '='
+        if(eqCounter == 0) GUIManager.consoleInstance.printErrorMessage("שגיאה עם הפרמטרים של הפקודה, חסר '=' בשורה: " + line, line); // Make sure there is at least one '='
         String varName = par.substring(0, par.indexOf("="));
         String varValue = par.substring(par.indexOf("=") + 1);
-        if(!isVariableNameValid(varName)) GUIManager.consoleInstance.printErrorMessage("שגיאה עם הפרמטקים של הפקודה, שם משתנה לא חוקי בשורה: " + line); // Make sure there is at least one '='
+        if(!isVariableNameValid(varName)) GUIManager.consoleInstance.printErrorMessage("שגיאה עם הפרמטקים של הפקודה, שם משתנה לא חוקי בשורה: " + line, line); // Make sure there is at least one '='
 
 
 

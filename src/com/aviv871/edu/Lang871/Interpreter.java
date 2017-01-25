@@ -55,6 +55,6 @@ public class Interpreter
             }
         }
 
-        GUIManager.consoleInstance.printErrorMessage("שגיאה עם הפקודה בשורה: " + lineNumber);
+        GUIManager.consoleInstance.printErrorMessage("שגיאה עם הפקודה בשורה: " + lineNumber, lineNumber);
     }
 }
