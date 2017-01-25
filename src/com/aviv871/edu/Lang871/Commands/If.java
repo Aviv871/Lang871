@@ -16,6 +16,8 @@ public class If implements ICommand
     @Override
     public void sendParameters(String par, int lineNumber)
     {
+        while(par.endsWith(" ")) par = par.substring(0, par.length()-1); // Removing whitespaces in the end of the line
+
         if(!par.contains(" אז ")) throw new RuntimeException("Error with command parameters, missing 'אז', in line: " + lineNumber);
         String condition = par.substring(0, par.indexOf(" אז "));
         String command = par.substring(par.indexOf(" אז ") + 4);

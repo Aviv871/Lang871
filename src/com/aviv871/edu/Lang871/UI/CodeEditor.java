@@ -1,9 +1,7 @@
 package com.aviv871.edu.Lang871.UI;
 
 import javax.swing.*;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -54,6 +52,53 @@ public class CodeEditor
             System.err.format("Exception occurred trying to read '%s'.", file.getName());
             e.printStackTrace();
             return null;
+        }
+    }
+
+    public static void saveFile()
+    {
+        if(codeFile != null)
+        {
+            try
+            {
+                PrintWriter writer = new PrintWriter(codeFile);
+                for(String line: getTheCode())
+                {
+                    writer.println(line);
+                }
+                writer.close();
+            }
+            catch(IOException e)
+            {
+                // Do something  TODO: Display error massage
+            }
+        }
+        else
+        {
+            saveFileAs();
+        }
+    }
+
+    public static void saveFileAs()
+    {
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setCurrentDirectory(new File("C:\\Users\\גלעד\\Desktop\\אביב\\מסמכים\\תכנות\\Java\\src\\com\\aviv871\\edu\\Lang871")); // TODO: change to desktop and save the last location the user used
+
+        if(fileChooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION)
+        {
+            try
+            {
+                PrintWriter writer = new PrintWriter(fileChooser.getSelectedFile());
+                for(String line: getTheCode())
+                {
+                    writer.println(line);
+                }
+                writer.close();
+            }
+            catch(IOException e)
+            {
+                // Do something  TODO: Display error massage
+            }
         }
     }
 }

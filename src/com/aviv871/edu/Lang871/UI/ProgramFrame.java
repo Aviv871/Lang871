@@ -17,6 +17,8 @@ public class ProgramFrame extends JFrame
     private static JButton buttonStart = new JButton("הרץ קוד");
     private static JButton buttonClear = new JButton("נקה פלט");
     private static JButton buttonLoad = new JButton("בחר קובץ");
+    private static JButton buttonSave = new JButton("שמור");
+    private static JButton buttonSaveAs = new JButton("שמור בשם");
 
     private static JLabel codeHead = new JLabel("קוד:");
     private static JLabel consoleHead = new JLabel("פלט:");
@@ -42,6 +44,7 @@ public class ProgramFrame extends JFrame
         constraints.insets = new Insets(10, 10, 10, 10);
         constraints.anchor = GridBagConstraints.WEST;
 
+        // Buttons
         add(buttonStart, constraints);
 
         constraints.gridx = 1;
@@ -50,23 +53,33 @@ public class ProgramFrame extends JFrame
         constraints.gridx = 2;
         add(buttonLoad, constraints);
 
-        constraints.gridx = 2;
+        constraints.gridx = 0;
         constraints.gridy = 1;
+        add(buttonSave, constraints);
+
+        constraints.gridx = 1;
+        constraints.gridy = 1;
+        add(buttonSaveAs, constraints);
+
+        // Text Areas
+        constraints.gridx = 2;
+        constraints.gridy = 2;
         add(codeHead, constraints);
 
         constraints.gridx = 2;
-        constraints.gridy = 2;
+        constraints.gridy = 3;
         add(consoleHead, constraints);
 
+        // Scroll
         constraints.gridx = 0;
-        constraints.gridy = 1;
+        constraints.gridy = 2;
         constraints.gridwidth = 2;
         constraints.fill = GridBagConstraints.BOTH;
-        constraints.weightx = 0.5;
-        constraints.weighty = 0.5;
+        constraints.weightx = 1;
+        constraints.weighty = 1;
         add(new JScrollPane(codeArea), constraints);
 
-        constraints.gridy = 2;
+        constraints.gridy = 3;
         add(new JScrollPane(consoleArea), constraints);
 
         // Adds event handler for the Start button
@@ -90,8 +103,24 @@ public class ProgramFrame extends JFrame
         buttonLoad.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
-                //LangMain.setCodeFile(openFile());
+                clearTheTextArea(codeArea);
                 CodeEditor.loadCodeFile(openFile());
+            }
+        });
+
+        // Adds event handler for the Load button
+        buttonSave.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                CodeEditor.saveFile();
+            }
+        });
+
+        // Adds event handler for the Load button
+        buttonSaveAs.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                CodeEditor.saveFileAs();
             }
         });
 

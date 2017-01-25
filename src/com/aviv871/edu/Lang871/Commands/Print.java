@@ -20,6 +20,8 @@ public class Print implements ICommand
     @Override
     public void sendParameters(String par, int line)
     {
+        while(par.endsWith(" ")) par = par.substring(0, par.length()-1); // Removing whitespaces in the end of the line
+
         if(par.startsWith("\"") && par.endsWith("\"")) // Quote
         {
             initiateCommand(par.substring(1, par.length()-1));

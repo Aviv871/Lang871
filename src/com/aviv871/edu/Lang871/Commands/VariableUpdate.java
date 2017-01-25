@@ -15,6 +15,8 @@ public class VariableUpdate implements ICommand
     @Override
     public void sendParameters(String par, int line)
     {
+        while(par.endsWith(" ")) par = par.substring(0, par.length()-1); // Removing whitespaces in the end of the line
+
         par = par.replaceAll("\\s",""); // Remove all whitespaces
         int eqCounter = 0;
         for(char c: par.toCharArray())
