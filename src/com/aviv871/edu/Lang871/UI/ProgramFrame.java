@@ -11,21 +11,28 @@ import java.io.File;
 
 public class ProgramFrame extends JFrame
 {
-    private static JTextArea textArea;
+    private static JTextArea consoleArea;
+    private static JTextArea codeArea;
 
-    private static JButton buttonStart = new JButton("הרץ");
-    private static JButton buttonClear = new JButton("נקה");
+    private static JButton buttonStart = new JButton("הרץ קוד");
+    private static JButton buttonClear = new JButton("נקה פלט");
     private static JButton buttonLoad = new JButton("בחר קובץ");
+
+    private static JLabel codeHead = new JLabel("קוד:");
+    private static JLabel consoleHead = new JLabel("פלט:");
 
     public ProgramFrame()
     {
         super("Lang871 Interpreter");
 
-        textArea = new JTextArea(50, 10);
-        textArea.setEditable(false);
-        textArea.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
-        //textArea.setFont(new Font("Dialog", Font.PLAIN, 12));
-        Console console = new Console(textArea);
+        consoleArea = new JTextArea(50, 10);
+        consoleArea.setEditable(false);
+        consoleArea.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+        Console.setTextArea(consoleArea);
+
+        codeArea = new JTextArea(50, 10);
+        codeArea.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+        CodeEditor.setTextArea(codeArea);
 
         // Creates the GUI
         setLayout(new GridBagLayout());
@@ -43,20 +50,30 @@ public class ProgramFrame extends JFrame
         constraints.gridx = 2;
         add(buttonLoad, constraints);
 
+        constraints.gridx = 2;
+        constraints.gridy = 1;
+        add(codeHead, constraints);
+
+        constraints.gridx = 2;
+        constraints.gridy = 2;
+        add(consoleHead, constraints);
+
         constraints.gridx = 0;
         constraints.gridy = 1;
         constraints.gridwidth = 2;
         constraints.fill = GridBagConstraints.BOTH;
-        constraints.weightx = 1.0;
-        constraints.weighty = 1.0;
+        constraints.weightx = 0.5;
+        constraints.weighty = 0.5;
+        add(new JScrollPane(codeArea), constraints);
 
-        add(new JScrollPane(textArea), constraints);
+        constraints.gridy = 2;
+        add(new JScrollPane(consoleArea), constraints);
 
         // Adds event handler for the Start button
         buttonStart.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
-                clearTheTextArea(textArea);
+                clearTheTextArea(consoleArea);
                 LangMain.interpretFile();
             }
         });
@@ -65,7 +82,7 @@ public class ProgramFrame extends JFrame
         buttonClear.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
-                clearTheTextArea(textArea);
+                clearTheTextArea(consoleArea);
             }
         });
 
@@ -73,12 +90,13 @@ public class ProgramFrame extends JFrame
         buttonLoad.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
-                LangMain.setCodeFile(openFile());
+                //LangMain.setCodeFile(openFile());
+                CodeEditor.loadCodeFile(openFile());
             }
         });
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(600, 400);
+        setSize(800, 600);
         setLocationRelativeTo(null);    // centers on screen
     }
 

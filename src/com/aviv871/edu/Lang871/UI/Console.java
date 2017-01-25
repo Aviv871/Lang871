@@ -6,9 +6,9 @@ public class Console
 {
     private static JTextArea console;
 
-    public Console(JTextArea ta)
+    public static void setTextArea(JTextArea textArea)
     {
-        console = ta;
+        console = textArea;
     }
 
     public static void print(String str)
