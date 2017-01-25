@@ -3,7 +3,8 @@ package com.aviv871.edu.Lang871.UI;
 import com.aviv871.edu.Lang871.LangMain;
 
 import javax.swing.*;
-import javax.swing.text.BadLocationException;
+import javax.swing.text.AbstractDocument;
+import javax.swing.text.StyledDocument;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -35,6 +36,10 @@ public class ProgramFrame extends JFrame
         codeArea = new JTextPane();
         codeArea.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
         GUIManager.codeEditorInstance.setTextArea(codeArea);
+
+        // Setting the code editor document filter
+        AbstractDocument document = (AbstractDocument) codeArea.getDocument();
+        document.setDocumentFilter(new CodeFilter());
 
         // Creates the GUI
         setLayout(new GridBagLayout());
@@ -90,7 +95,7 @@ public class ProgramFrame extends JFrame
         buttonStart.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
-                clearTheTextArea(consoleArea);
+                GUIManager.consoleInstance.clearTheTextArea();
                 LangMain.interpretFile();
             }
         });
@@ -99,15 +104,14 @@ public class ProgramFrame extends JFrame
         buttonClear.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
-                clearTheTextArea(consoleArea);
-            }
+                GUIManager.consoleInstance.clearTheTextArea();            }
         });
 
         // Adds event handler for the Load button
         buttonLoad.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
-                clearTheTextArea(codeArea);
+                GUIManager.codeEditorInstance.clearTheTextArea();
                 GUIManager.codeEditorInstance.loadCodeFile(openFile());
             }
         });
@@ -128,21 +132,12 @@ public class ProgramFrame extends JFrame
             }
         });
 
+        // Adds event handler for the code editor
+        //codeArea.getDocument().addDocumentListener(new CodeListener());
+
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(800, 600);
         setLocationRelativeTo(null);    // centers on screen
-    }
-
-    private static void clearTheTextArea(JTextPane area)
-    {
-        try
-        {
-            area.getDocument().remove(0, area.getDocument().getLength());
-        }
-        catch (BadLocationException ex)
-        {
-            ex.printStackTrace();
-        }
     }
 
     private static File openFile()

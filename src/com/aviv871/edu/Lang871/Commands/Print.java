@@ -1,6 +1,5 @@
 package com.aviv871.edu.Lang871.Commands;
 
-import com.aviv871.edu.Lang871.UI.Console;
 import com.aviv871.edu.Lang871.UI.GUIManager;
 
 public class Print implements ICommand
@@ -56,7 +55,7 @@ public class Print implements ICommand
                 }
             }
 
-            GUIManager.consoleInstance.printErrorMessage("שגיאה עם הפרמטרים של הפקודה בשורה: " + line);
+            GUIManager.consoleInstance.printErrorMessage("שגיאה עם הפרמטרים של הפקודה בשורה: " + line, line);
         }
     }
 }

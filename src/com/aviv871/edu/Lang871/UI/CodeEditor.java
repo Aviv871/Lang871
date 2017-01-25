@@ -1,6 +1,8 @@
 package com.aviv871.edu.Lang871.UI;
 
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.text.Document;
 import java.awt.*;
 import java.io.*;
 import java.util.ArrayList;
@@ -11,6 +13,8 @@ public class CodeEditor extends GUITextArea
 {
     private File codeFile;
 
+    public boolean displayingError = false;
+
     public void loadCodeFile(File file)
     {
         codeFile = file;
@@ -18,7 +22,7 @@ public class CodeEditor extends GUITextArea
         List<String> codeList = readFile(codeFile);
         for(String line: codeList)
         {
-            appendToPane(line + "\n", Color.black);
+            appendToPane(line + "\n", Color.BLACK);
         }
     }
 
@@ -26,6 +30,11 @@ public class CodeEditor extends GUITextArea
     {
         String[] lines = textPane.getText().split("\\r?\\n"); // Split by new lines
         return Arrays.asList(lines);
+    }
+
+    public String getTheText()
+    {
+        return textPane.getText();
     }
 
     private List<String> readFile(File file)
@@ -96,6 +105,35 @@ public class CodeEditor extends GUITextArea
                 GUIManager.consoleInstance.printErrorMessage("שגיאה במהלך הניסיון לקרוא את הקובץ קוד");
                 e.printStackTrace();
             }
+        }
+    }
+
+    public void rewriteCodeTextWithErrorHighlight(int line)
+    {
+        List<String> oldCode = getTheCode();
+        clearTheTextArea();
+
+        String str;
+        for(int i = 0; i < oldCode.size(); i++)
+        {
+            str = oldCode.get(i);
+
+            if(i == line - 1) appendToPane(str + "\n", Color.RED);
+            else appendToPane(str + "\n", Color.BLACK);
+        }
+        displayingError = true;
+    }
+
+    public void rewriteCleanCodeText()
+    {
+        displayingError = false;
+        List<String> oldCode = getTheCode();
+
+        clearTheTextArea();
+
+        for(String str: oldCode)
+        {
+            appendToPane(str + "\n", Color.BLACK);
         }
     }
 }

@@ -6,28 +6,37 @@ public class Console extends GUITextArea
 {
     public void print(String str)
     {
-        appendToPane(str, Color.black);
+        appendToPane(str, Color.BLACK);
     }
 
     public void println(String str)
     {
-        appendToPane(str + "\n", Color.black);
+        appendToPane(str + "\n", Color.BLACK);
     }
 
     public void println()
     {
-        appendToPane("\n", Color.black);
+        appendToPane("\n", Color.BLACK);
+    }
+
+    public void printErrorMessage(String error, int line) throws RuntimeException
+    {
+        appendToPane(error + "\n", Color.RED);
+
+        GUIManager.codeEditorInstance.rewriteCodeTextWithErrorHighlight(line);
+
+        throw new RuntimeException();
     }
 
     public void printErrorMessage(String error) throws RuntimeException
     {
-        appendToPane(error + "\n", Color.red);
+        appendToPane(error + "\n", Color.RED);
 
         throw new RuntimeException();
     }
 
     public void printLogMessage(String error) throws RuntimeException
     {
-        appendToPane(error + "\n", Color.blue);
+        appendToPane(error + "\n", Color.BLUE);
     }
 }
