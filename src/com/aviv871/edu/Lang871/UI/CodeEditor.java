@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class CodeEditor extends GUITextArea
+public class CodeEditor extends UITextArea
 {
     private File codeFile;
 
@@ -51,7 +51,7 @@ public class CodeEditor extends GUITextArea
         }
         catch (Exception e)
         {
-            GUIManager.consoleInstance.printErrorMessage("שגיאה במהלך הניסיון לקרוא את הקובץ קוד");
+            UIManager.consoleInstance.printErrorMessage("שגיאה במהלך הניסיון לקרוא את הקובץ קוד");
             e.printStackTrace();
             return null;
         }
@@ -72,7 +72,7 @@ public class CodeEditor extends GUITextArea
             }
             catch(IOException e)
             {
-                GUIManager.consoleInstance.printErrorMessage("שגיאה במהלך הניסיון לשמור את קובץ הקוד");
+                UIManager.consoleInstance.printErrorMessage("שגיאה במהלך הניסיון לשמור את קובץ הקוד");
                 e.printStackTrace();
             }
         }
@@ -100,7 +100,7 @@ public class CodeEditor extends GUITextArea
             }
             catch(IOException e)
             {
-                GUIManager.consoleInstance.printErrorMessage("שגיאה במהלך הניסיון לקרוא את הקובץ קוד");
+                UIManager.consoleInstance.printErrorMessage("שגיאה במהלך הניסיון לקרוא את הקובץ קוד");
                 e.printStackTrace();
             }
         }

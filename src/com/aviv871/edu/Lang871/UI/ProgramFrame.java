@@ -34,11 +34,11 @@ public class ProgramFrame extends JFrame
         consoleArea = new JTextPane();
         consoleArea.setEditable(false);
         consoleArea.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
-        GUIManager.consoleInstance.setTextArea(consoleArea);
+        UIManager.consoleInstance.setTextArea(consoleArea);
 
         codeArea = new JTextPane();
         codeArea.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
-        GUIManager.codeEditorInstance.setTextArea(codeArea);
+        UIManager.codeEditorInstance.setTextArea(codeArea);
 
         // Setting the code editor document filter
         AbstractDocument document = (AbstractDocument) codeArea.getDocument();
@@ -98,7 +98,7 @@ public class ProgramFrame extends JFrame
         buttonStart.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
-                GUIManager.consoleInstance.clearTheTextArea();
+                UIManager.consoleInstance.clearTheTextArea();
                 LangMain.interpretFile();
             }
         });
@@ -107,15 +107,15 @@ public class ProgramFrame extends JFrame
         buttonClear.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
-                GUIManager.consoleInstance.clearTheTextArea();            }
+                UIManager.consoleInstance.clearTheTextArea();            }
         });
 
         // Adds event handler for the Load button
         buttonLoad.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
-                GUIManager.codeEditorInstance.clearTheTextArea();
-                GUIManager.codeEditorInstance.loadCodeFile(openFile());
+                UIManager.codeEditorInstance.clearTheTextArea();
+                UIManager.codeEditorInstance.loadCodeFile(openFile());
             }
         });
 
@@ -123,7 +123,7 @@ public class ProgramFrame extends JFrame
         buttonSave.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
-                GUIManager.codeEditorInstance.saveFile();
+                UIManager.codeEditorInstance.saveFile();
             }
         });
 
@@ -131,7 +131,7 @@ public class ProgramFrame extends JFrame
         buttonSaveAs.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
-                GUIManager.codeEditorInstance.saveFileAs();
+                UIManager.codeEditorInstance.saveFileAs();
             }
         });
 
@@ -140,7 +140,7 @@ public class ProgramFrame extends JFrame
             @Override
             public synchronized void drop(DropTargetDropEvent event)
             {
-                GUIManager.codeEditorInstance.clearTheTextArea();
+                UIManager.codeEditorInstance.clearTheTextArea();
 
                 try
                 {
@@ -148,8 +148,8 @@ public class ProgramFrame extends JFrame
                     java.util.List<File> droppedFiles = (java.util.List<File>) event.getTransferable().getTransferData(DataFlavor.javaFileListFlavor);
                     if(droppedFiles.size() == 1)
                     {
-                        if(droppedFiles.get(0).getName().endsWith(".871")) GUIManager.codeEditorInstance.loadCodeFile(droppedFiles.get(0));
-                        else GUIManager.consoleInstance.printErrorMessage("זהו לא קובץ קוד 871. !");
+                        if(droppedFiles.get(0).getName().endsWith(".871")) UIManager.codeEditorInstance.loadCodeFile(droppedFiles.get(0));
+                        else UIManager.consoleInstance.printErrorMessage("זהו לא קובץ קוד 871. !");
                     }
                 }
                 catch (Exception ex)
@@ -175,7 +175,7 @@ public class ProgramFrame extends JFrame
         if(fileChooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION)
         {
             if(fileChooser.getSelectedFile().getName().endsWith(".871")) return fileChooser.getSelectedFile();
-            else GUIManager.consoleInstance.printErrorMessage("זהו לא קובץ קוד 871. !");
+            else UIManager.consoleInstance.printErrorMessage("זהו לא קובץ קוד 871. !");
         }
 
         return null;

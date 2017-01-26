@@ -9,7 +9,7 @@ public class CodeFilter extends DocumentFilter
     @Override
     public void remove(FilterBypass fb, int offset, int length) throws BadLocationException
     {
-        if (GUIManager.codeEditorInstance.displayingError)
+        if (UIManager.codeEditorInstance.displayingError)
         {
             codeChanged();
         }
@@ -20,19 +20,19 @@ public class CodeFilter extends DocumentFilter
     @Override
     public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException
     {
-        if (GUIManager.codeEditorInstance.displayingError)
+        if (UIManager.codeEditorInstance.displayingError)
         {
             codeChanged();
         }
 
-        super.replace(fb, offset, length, text, GUIManager.codeEditorInstance.getDefaultAttributeSet());
+        super.replace(fb, offset, length, text, UIManager.codeEditorInstance.getDefaultAttributeSet());
     }
 
     private void codeChanged()
     {
-        if(GUIManager.codeEditorInstance.displayingError)
+        if(UIManager.codeEditorInstance.displayingError)
         {
-            GUIManager.codeEditorInstance.rewriteCleanCodeText();
+            UIManager.codeEditorInstance.rewriteCleanCodeText();
         }
     }
 }

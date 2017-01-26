@@ -1,16 +1,16 @@
 package com.aviv871.edu.Lang871;
 
-import com.aviv871.edu.Lang871.UI.GUIManager;
+import com.aviv871.edu.Lang871.UI.UIManager;
 
 public class LangMain
 {
     public static void main(String[] args)
     {
-        GUIManager.openGUI();
+        UIManager.openUI();
     }
 
     public static void interpretFile()
     {
-        Interpreter.sendCodeToInterpret(GUIManager.codeEditorInstance.getTheCode());
+        Interpreter.sendCodeToInterpret(UIManager.codeEditorInstance.getTheCode());
     }
 }

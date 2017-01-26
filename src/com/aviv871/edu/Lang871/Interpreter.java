@@ -2,7 +2,7 @@ package com.aviv871.edu.Lang871;
 
 import com.aviv871.edu.Lang871.Commands.Variable;
 import com.aviv871.edu.Lang871.References.LangKeyWords;
-import com.aviv871.edu.Lang871.UI.GUIManager;
+import com.aviv871.edu.Lang871.UI.UIManager;
 
 import java.util.List;
 
@@ -20,7 +20,7 @@ public class Interpreter
             initiateLine(line, currentLineNumber);
         }
 
-        GUIManager.consoleInstance.printLogMessage("\n" + "משתנים:" + "\n" + Variable.variables.toString()); // For debugging only!
+        UIManager.consoleInstance.printLogMessage("\n" + "משתנים:" + "\n" + Variable.variables.toString()); // For debugging only!
     }
 
     private static boolean isLineEmpty(String line)
@@ -55,6 +55,6 @@ public class Interpreter
             }
         }
 
-        GUIManager.consoleInstance.printErrorMessage("שגיאה עם הפקודה בשורה: " + lineNumber, lineNumber);
+        UIManager.consoleInstance.printErrorMessage("שגיאה עם הפקודה בשורה: " + lineNumber, lineNumber);
     }
 }

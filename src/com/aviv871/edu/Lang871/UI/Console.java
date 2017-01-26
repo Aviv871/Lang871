@@ -2,7 +2,7 @@ package com.aviv871.edu.Lang871.UI;
 
 import java.awt.*;
 
-public class Console extends GUITextArea
+public class Console extends UITextArea
 {
     public void print(String str)
     {
@@ -23,7 +23,7 @@ public class Console extends GUITextArea
     {
         appendToPane(error + "\n", Color.RED);
 
-        GUIManager.codeEditorInstance.rewriteCodeTextWithErrorHighlight(line);
+        UIManager.codeEditorInstance.rewriteCodeTextWithErrorHighlight(line);
 
         throw new RuntimeException();
     }
