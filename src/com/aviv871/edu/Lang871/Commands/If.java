@@ -54,6 +54,24 @@ public class If implements ICommand
             UIManager.consoleInstance.printErrorMessage("שגיאה עם הפרמטרים של הפקודה, השואה לא חוקית בשורה: " + lineNumber, lineNumber);
         }
 
+        if(con.length() == currentPosition) // The Condition is only one variable (boolean)
+        {
+            for(String name: Variable.getVariablesNames()) // Other Variable
+            {
+                if(par1.equals(name))
+                {
+                    if(Variable.variables.get(par1) instanceof Boolean)
+                    {
+                        return (boolean) Variable.variables.get(par1);
+                    }
+                    else
+                    {
+                        UIManager.consoleInstance.printErrorMessage("שגיאה עם הפרמטרים של הפקודה, סוג ערך המשתנה לא חוקי בשורה: " + lineNumber, lineNumber);
+                    }
+                }
+            }
+        }
+
         startPosition = currentPosition;
         if(con.charAt(currentPosition) == '=' || con.charAt(currentPosition) == '!' || con.charAt(currentPosition) == '<' || con.charAt(currentPosition) == '>') // Finding the comparison type
         {
