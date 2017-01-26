@@ -4,8 +4,11 @@ import com.aviv871.edu.Lang871.LangMain;
 
 import javax.swing.*;
 import javax.swing.text.AbstractDocument;
-import javax.swing.text.StyledDocument;
 import java.awt.*;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.dnd.DnDConstants;
+import java.awt.dnd.DropTarget;
+import java.awt.dnd.DropTargetDropEvent;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -132,6 +135,30 @@ public class ProgramFrame extends JFrame
             }
         });
 
+        // Adds handler for drag-and-drop event, for dropping code files on the code editor
+        codeArea.setDropTarget(new DropTarget() {
+            @Override
+            public synchronized void drop(DropTargetDropEvent event)
+            {
+                GUIManager.codeEditorInstance.clearTheTextArea();
+
+                try
+                {
+                    event.acceptDrop(DnDConstants.ACTION_COPY);
+                    java.util.List<File> droppedFiles = (java.util.List<File>) event.getTransferable().getTransferData(DataFlavor.javaFileListFlavor);
+                    if(droppedFiles.size() == 1)
+                    {
+                        if(droppedFiles.get(0).getName().endsWith(".871")) GUIManager.codeEditorInstance.loadCodeFile(droppedFiles.get(0));
+                        else GUIManager.consoleInstance.printErrorMessage("זהו לא קובץ קוד 871. !");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ex.printStackTrace();
+                }
+            }
+        });
+
         // Adds event handler for the code editor
         //codeArea.getDocument().addDocumentListener(new CodeListener());
 
@@ -147,7 +174,8 @@ public class ProgramFrame extends JFrame
 
         if(fileChooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION)
         {
-            return fileChooser.getSelectedFile();
+            if(fileChooser.getSelectedFile().getName().endsWith(".871")) return fileChooser.getSelectedFile();
+            else GUIManager.consoleInstance.printErrorMessage("זהו לא קובץ קוד 871. !");
         }
 
         return null;

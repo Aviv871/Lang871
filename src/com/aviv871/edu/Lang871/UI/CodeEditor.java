@@ -1,8 +1,6 @@
 package com.aviv871.edu.Lang871.UI;
 
 import javax.swing.*;
-import javax.swing.event.DocumentEvent;
-import javax.swing.text.Document;
 import java.awt.*;
 import java.io.*;
 import java.util.ArrayList;

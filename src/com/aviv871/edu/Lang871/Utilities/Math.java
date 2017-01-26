@@ -1,7 +1,6 @@
 package com.aviv871.edu.Lang871.Utilities;
 
 import com.aviv871.edu.Lang871.Commands.Variable;
-import com.aviv871.edu.Lang871.UI.Console;
 import com.aviv871.edu.Lang871.UI.GUIManager;
 
 public class Math

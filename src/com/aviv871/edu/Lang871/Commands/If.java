@@ -1,7 +1,6 @@
 package com.aviv871.edu.Lang871.Commands;
 
 import com.aviv871.edu.Lang871.Interpreter;
-import com.aviv871.edu.Lang871.UI.Console;
 import com.aviv871.edu.Lang871.UI.GUIManager;
 import com.aviv871.edu.Lang871.Utilities.Math;
 
