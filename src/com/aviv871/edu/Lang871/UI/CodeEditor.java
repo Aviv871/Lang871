@@ -126,6 +126,7 @@ public class CodeEditor extends UITextArea
     {
         displayingError = false;
         List<String> oldCode = getTheCode();
+        int caretPosition = textPane.getCaretPosition();
 
         clearTheTextArea();
 
@@ -133,5 +134,6 @@ public class CodeEditor extends UITextArea
         {
             appendToPane(str + "\n", Color.BLACK);
         }
+        textPane.setCaretPosition(caretPosition);
     }
 }

@@ -64,8 +64,14 @@ public class Variable implements ICommand
             }
         }
 
-
-        Variable.variables.put(varName, Math.evaluateArithmeticFromString(varValue, line)); // Number including arithmetic or just an error
+        try
+        {
+            Variable.variables.put(varName, Math.evaluateArithmeticFromString(varValue, line)); // Number including arithmetic, or just an error
+        }
+        catch (RuntimeException e)
+        {
+            Variable.variables.put(varName, Math.evaluateBooleanAlgebraFromString(varValue, line)); // If not number maybe boolean, if not, just error
+        }
     }
 
     private boolean isVariableNameValid(String name)

@@ -59,7 +59,13 @@ public class VariableUpdate implements ICommand
             }
         }
 
-
-        Variable.variables.replace(varName, Math.evaluateArithmeticFromString(varValue, line)); // Number including arithmetic or just an error
+        try
+        {
+            Variable.variables.replace(varName, Math.evaluateArithmeticFromString(varValue, line)); // Number including arithmetic, or just an error
+        }
+        catch (RuntimeException e)
+        {
+            Variable.variables.replace(varName, Math.evaluateBooleanAlgebraFromString(varValue, line)); // If not number maybe boolean, if not, just error
+        }
     }
 }
