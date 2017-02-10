@@ -2,6 +2,7 @@ package com.aviv871.edu.Lang871.Commands;
 
 import com.aviv871.edu.Lang871.UI.UIManager;
 import com.aviv871.edu.Lang871.Utilities.Math;
+import com.aviv871.edu.Lang871.Utilities.NumberExpressionSolver;
 
 public class VariableUpdate implements ICommand
 {
@@ -59,13 +60,6 @@ public class VariableUpdate implements ICommand
             }
         }
 
-        try
-        {
-            Variable.variables.replace(varName, Math.evaluateArithmeticFromString(varValue, line)); // Number including arithmetic, or just an error
-        }
-        catch (RuntimeException e)
-        {
-            Variable.variables.replace(varName, Math.evaluateBooleanAlgebraFromString(varValue, line)); // If not number maybe boolean, if not, just error
-        }
+        Variable.variables.replace(varName, new NumberExpressionSolver(varValue, line).getResult()); // If not number this check for boolean as well
     }
 }

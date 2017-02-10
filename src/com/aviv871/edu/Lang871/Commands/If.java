@@ -2,6 +2,7 @@ package com.aviv871.edu.Lang871.Commands;
 
 import com.aviv871.edu.Lang871.Interpreter;
 import com.aviv871.edu.Lang871.UI.UIManager;
+import com.aviv871.edu.Lang871.Utilities.BooleanExpressionSolver;
 import com.aviv871.edu.Lang871.Utilities.Math;
 
 public class If implements ICommand
@@ -25,6 +26,6 @@ public class If implements ICommand
 
         //if(checkStringCondition(condition, lineNumber)) Interpreter.initiateLine(command, lineNumber);
         condition = condition.replaceAll("\\s",""); // Remove all whitespaces
-        if(Math.evaluateBooleanAlgebraFromString(condition, lineNumber)) Interpreter.initiateLine(command, lineNumber);
+        if((boolean) new BooleanExpressionSolver(condition, lineNumber).getResult()) Interpreter.initiateLine(command, lineNumber);
     }
 }

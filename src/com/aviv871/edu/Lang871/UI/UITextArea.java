@@ -1,5 +1,7 @@
 package com.aviv871.edu.Lang871.UI;
 
+import com.aviv871.edu.Lang871.Commands.Variable;
+
 import javax.swing.*;
 import javax.swing.text.*;
 import java.awt.*;
@@ -21,6 +23,8 @@ public class UITextArea
 
     public void clearTheTextArea()
     {
+        Variable.variables.clear();
+
         try
         {
             textPane.getDocument().remove(0, textPane.getDocument().getLength());

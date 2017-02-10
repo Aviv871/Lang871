@@ -1,7 +1,10 @@
 package com.aviv871.edu.Lang871.Commands;
 
+import com.aviv871.edu.Lang871.References.LangKeyWords;
 import com.aviv871.edu.Lang871.UI.UIManager;
+import com.aviv871.edu.Lang871.Utilities.ExpressionSolver;
 import com.aviv871.edu.Lang871.Utilities.Math;
+import com.aviv871.edu.Lang871.Utilities.NumberExpressionSolver;
 
 import java.util.HashMap;
 import java.util.Set;
@@ -64,14 +67,7 @@ public class Variable implements ICommand
             }
         }
 
-        try
-        {
-            Variable.variables.put(varName, Math.evaluateArithmeticFromString(varValue, line)); // Number including arithmetic, or just an error
-        }
-        catch (RuntimeException e)
-        {
-            Variable.variables.put(varName, Math.evaluateBooleanAlgebraFromString(varValue, line)); // If not number maybe boolean, if not, just error
-        }
+        Variable.variables.put(varName, new NumberExpressionSolver(varValue, line).getResult()); // If not number this check for boolean as well
     }
 
     private boolean isVariableNameValid(String name)
@@ -80,6 +76,22 @@ public class Variable implements ICommand
         for(char c: name.toCharArray())
         {
             if((c < 'א' || c > 'ת') && (c < '0' || c > '9')) return false;
+        }
+
+        for(LangKeyWords keyWord: LangKeyWords.values()) // Command names that are already taken
+        {
+            if(name.equals(keyWord.get871Command().get871Code()))
+            {
+                return false;
+            }
+        }
+
+        for(String varName: Variable.getVariablesNames()) // Variable names that are already taken
+        {
+            if(name.equals(varName))
+            {
+                return false;
+            }
         }
 
         return true;

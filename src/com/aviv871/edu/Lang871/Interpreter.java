@@ -21,6 +21,7 @@ public class Interpreter
         }
 
         UIManager.consoleInstance.printLogMessage("\n" + "משתנים:" + "\n" + Variable.variables.toString()); // For debugging only!
+        Variable.variables.clear();
     }
 
     private static boolean isLineEmpty(String line)
