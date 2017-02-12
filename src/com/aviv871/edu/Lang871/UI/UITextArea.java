@@ -1,6 +1,7 @@
 package com.aviv871.edu.Lang871.UI;
 
 import com.aviv871.edu.Lang871.Commands.Variable;
+import com.aviv871.edu.Lang871.LangMain;
 
 import javax.swing.*;
 import javax.swing.text.*;
@@ -23,7 +24,7 @@ public class UITextArea
 
     public void clearTheTextArea()
     {
-        Variable.variables.clear();
+        LangMain.cleanPreviousData();
 
         try
         {

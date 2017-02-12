@@ -23,7 +23,7 @@ public class Variable implements ICommand
         if(eqCounter == 0) UIManager.consoleInstance.printErrorMessage("שגיאה עם הפרמטרים של הפקודה, חסר '=' בשורה: " + line, line); // Make sure there is at least one '='
         String varName = par.substring(0, par.indexOf("="));
         String varValue = par.substring(par.indexOf("=") + 1);
-        if(!isVariableNameValid(varName)) UIManager.consoleInstance.printErrorMessage("שגיאה עם הפרמטקים של הפקודה, שם משתנה לא חוקי בשורה: " + line, line); // Make sure there is at least one '='
+        if(!isVariableNameValid(varName)) UIManager.consoleInstance.printErrorMessage("שגיאה עם הפרמטרים של הפקודה, שם משתנה לא חוקי בשורה: " + line, line); // Make sure there is at least one '='
 
         if(varValue.startsWith("\"") && varValue.endsWith("\"") && varValue.length() != 1) // String
         {
@@ -53,6 +53,14 @@ public class Variable implements ICommand
         for(String varName: Variable.getVariablesNames()) // Variable names that are already taken
         {
             if(name.equals(varName))
+            {
+                return false;
+            }
+        }
+
+        for(String funcName: Function.getFunctionsNames()) // Functions names that are already taken
+        {
+            if(name.equals(funcName))
             {
                 return false;
             }

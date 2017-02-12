@@ -17,8 +17,7 @@ public class VariableUpdate implements ICommand
         if(eqCounter == 0) UIManager.consoleInstance.printErrorMessage("שגיאה עם הפרמטרים של הפקודה, חסר '=' בשורה: " + line, line); // Make sure there is at least one '='
         String varName = par.substring(0, par.indexOf("="));
         String varValue = par.substring(par.indexOf("=") + 1);
-        // Can not happen! //if(!Variable.isVariableExist(varName)) throw new RuntimeException("Error with command parameters, with variable name in line: " + line); // Variable not found
-
+        if(!Variable.doesVariableExist(varName)) UIManager.consoleInstance.printErrorMessage("שגיאה עם הפרמטרים של הפקודה, משתנה שלא קיים בשורה: " + line, line); // Variable not found
 
 
         if(varValue.startsWith("\"") && varValue.endsWith("\"") && varValue.length() != 1) // String

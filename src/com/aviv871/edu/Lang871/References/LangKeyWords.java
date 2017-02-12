@@ -8,11 +8,11 @@ public enum LangKeyWords
     VARIABLE(new Variable(), "הגדר"),
     VARIABLE_POST(new VariableUpdate(), "הצב"),
     IF(new If(), "אם"),
-    FUNCTION(new Function(), "פונקציה");
+    FUNCTION(new Function(), "פונקציה"),
+    FUNCTION_CALL(new FunctionCall(), "הפעל");
 
     private ICommand command;
     private String code871;
-    private Class aClass;
 
     LangKeyWords(ICommand com, String code)
     {

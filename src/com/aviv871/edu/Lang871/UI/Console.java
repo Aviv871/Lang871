@@ -1,6 +1,7 @@
 package com.aviv871.edu.Lang871.UI;
 
 import com.aviv871.edu.Lang871.Commands.Variable;
+import com.aviv871.edu.Lang871.LangMain;
 
 import java.awt.*;
 
@@ -27,7 +28,7 @@ public class Console extends UITextArea
 
         UIManager.codeEditorInstance.rewriteCodeTextWithErrorHighlight(line);
 
-        Variable.variables.clear();
+        LangMain.cleanPreviousData();
         throw new RuntimeException();
     }
 
@@ -35,7 +36,7 @@ public class Console extends UITextArea
     {
         appendToPane(error + "\n", Color.RED);
 
-        Variable.variables.clear();
+        LangMain.cleanPreviousData();
         throw new RuntimeException();
     }
 

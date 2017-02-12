@@ -1,31 +1,41 @@
 package com.aviv871.edu.Lang871;
 
+import com.aviv871.edu.Lang871.Commands.Function;
 import com.aviv871.edu.Lang871.Commands.Variable;
 import com.aviv871.edu.Lang871.References.LangKeyWords;
 import com.aviv871.edu.Lang871.UI.UIManager;
+import com.aviv871.edu.Lang871.Utilities.CodeBlock;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Interpreter
 {
+    private static final String CODE_BLOCK_END_KEY_WORD = "סוף";
+
+    private static List<String> theCurrentCode;
+    private static ArrayList<Integer> cutedCodeLines = new ArrayList<>();
+
     public static void sendCodeToInterpret(List<String> code)
     {
-        int currentLineNumber = 0;
+        cutedCodeLines.clear();
+        theCurrentCode = code;
 
-        for(String line: code)
+        for(int i = 0; i < theCurrentCode.size(); i++)
         {
-            currentLineNumber++;
-            if(line.isEmpty()) continue;
+            if(theCurrentCode.get(i).isEmpty()) continue;
 
-            initiateLine(line, currentLineNumber);
+            if(!cutedCodeLines.contains(i + 1)) initiateLine(theCurrentCode.get(i), i + 1);
         }
 
         UIManager.consoleInstance.printLogMessage("\n" + "משתנים:" + "\n" + Variable.variables.toString()); // For debugging only!
-        Variable.variables.clear();
+        LangMain.cleanPreviousData();
     }
 
     public static void initiateLine(String line, int lineNumber)
     {
+        while(line.startsWith(" ")) line = line.substring(1, line.length()); // Removing whitespaces in the beginning of the line
+
         for(LangKeyWords keyWord: LangKeyWords.values()) // Commands
         {
             if (line.startsWith(keyWord.get871Code() + " "))
@@ -45,6 +55,37 @@ public class Interpreter
             }
         }
 
+        for(String funcName: Function.getFunctionsNames()) // Functions
+        {
+            if (line.startsWith(funcName))
+            {
+                LangKeyWords.FUNCTION_CALL.getCommand().sendParameters(line, lineNumber);
+                return;
+            }
+        }
+
         UIManager.consoleInstance.printErrorMessage("שגיאה עם הפקודה בשורה: " + lineNumber, lineNumber);
+    }
+
+    public static CodeBlock cutCodeBlock(int startLine)
+    {
+        for(int i = startLine; i < theCurrentCode.size() + 1; i++)
+        {
+            if(theCurrentCode.get(i - 1).replaceAll("\\s","").equals(CODE_BLOCK_END_KEY_WORD))
+            {
+                String[] block = new String[i - startLine];
+                int j = startLine;
+                for(; j < i; j++)
+                {
+                    block[j - startLine] = theCurrentCode.get(j - 1);
+                    cutedCodeLines.add(j);
+                }
+
+                cutedCodeLines.add(startLine - 1); // The function name line
+                cutedCodeLines.add(j); // The CODE_BLOCK_END_KEY_WORD line
+                return new CodeBlock(block, startLine);
+            }
+        }
+        return null;
     }
 }
