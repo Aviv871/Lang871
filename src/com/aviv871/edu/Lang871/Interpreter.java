@@ -15,7 +15,7 @@ public class Interpreter
         for(String line: code)
         {
             currentLineNumber++;
-            if(isLineEmpty(line)) continue;
+            if(line.isEmpty()) continue;
 
             initiateLine(line, currentLineNumber);
         }
@@ -24,25 +24,14 @@ public class Interpreter
         Variable.variables.clear();
     }
 
-    private static boolean isLineEmpty(String line)
-    {
-        if(line.equals("")) return true;
-        for(char c: line.toCharArray())
-        {
-            if(!Character.isWhitespace(c)) return false;
-        }
-
-        return true;
-    }
-
     public static void initiateLine(String line, int lineNumber)
     {
         for(LangKeyWords keyWord: LangKeyWords.values()) // Commands
         {
-            if (line.startsWith(keyWord.get871Command().get871Code() + " "))
+            if (line.startsWith(keyWord.get871Code() + " "))
             {
-                line = line.substring(keyWord.get871Command().get871Code().length() + 1); // Cutting the command part from the line and leaving only the parameters
-                keyWord.get871Command().sendParameters(line, lineNumber);
+                line = line.substring(keyWord.get871Code().length() + 1); // Cutting the command part from the line and leaving only the parameters
+                keyWord.getCommand().sendParameters(line, lineNumber);
                 return;
             }
         }
@@ -51,7 +40,7 @@ public class Interpreter
         {
             if (line.startsWith(varName))
             {
-                LangKeyWords.VARIABLE_POST.get871Command().sendParameters(line, lineNumber);
+                LangKeyWords.VARIABLE_POST.getCommand().sendParameters(line, lineNumber);
                 return;
             }
         }

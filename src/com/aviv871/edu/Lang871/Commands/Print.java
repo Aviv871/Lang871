@@ -4,14 +4,6 @@ import com.aviv871.edu.Lang871.UI.UIManager;
 
 public class Print implements ICommand
 {
-    private static final String code871 = "הדפס";
-
-    @Override
-    public String get871Code()
-    {
-        return code871;
-    }
-
     private void initiateCommand(String val)
     {
         UIManager.consoleInstance.println(val);

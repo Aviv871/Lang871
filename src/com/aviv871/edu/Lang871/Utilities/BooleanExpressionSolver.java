@@ -51,7 +51,6 @@ public class BooleanExpressionSolver extends ExpressionSolver
         if(parseStringComparison()) return tempValueHolder; // Check for string == string or !=
 
         double x = parseExpression_Numbers();
-        System.out.println(x);
         if(dealWithDoubleChar('=', '=')) return x == parseExpression_Numbers(); // Equal
         else if(dealWithDoubleChar('!', '=')) return x != parseExpression_Numbers(); // Not-Equal
         else if(dealWithDoubleChar('<', '=')) return x <= parseExpression_Numbers(); // Smaller or equal

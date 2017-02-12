@@ -121,7 +121,7 @@ public abstract class ExpressionSolver
             else if (func.equals("סינוס")) x = java.lang.Math.sin(java.lang.Math.toRadians(getFunctionInput()));
             else if (func.equals("קוסינוס")) x = java.lang.Math.cos(java.lang.Math.toRadians(getFunctionInput()));
             else if (func.equals("טנגנס")) x = java.lang.Math.tan(java.lang.Math.toRadians(getFunctionInput()));
-            else UIManager.consoleInstance.printErrorMessage("שגיאה עם הפרמטרים של הפקודה, פונקציה לא ידועה: " + func + " - בשורה " + lineNumber, lineNumber);
+            else errorFlag = true;
         }
         else
         {

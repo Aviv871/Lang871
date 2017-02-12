@@ -1,24 +1,13 @@
 package com.aviv871.edu.Lang871.Commands;
 
 import com.aviv871.edu.Lang871.UI.UIManager;
-import com.aviv871.edu.Lang871.Utilities.Math;
 import com.aviv871.edu.Lang871.Utilities.NumberExpressionSolver;
 
 public class VariableUpdate implements ICommand
 {
-    private static final String code871 = "הצב";
-
-    @Override
-    public String get871Code()
-    {
-        return code871;
-    }
-
     @Override
     public void sendParameters(String par, int line)
     {
-        while(par.endsWith(" ")) par = par.substring(0, par.length()-1); // Removing whitespaces in the end of the line
-
         par = par.replaceAll("\\s",""); // Remove all whitespaces
         int eqCounter = 0;
         for(char c: par.toCharArray())

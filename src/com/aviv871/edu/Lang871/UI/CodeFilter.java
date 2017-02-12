@@ -30,9 +30,6 @@ public class CodeFilter extends DocumentFilter
 
     private void codeChanged()
     {
-        if(UIManager.codeEditorInstance.displayingError)
-        {
-            UIManager.codeEditorInstance.rewriteCleanCodeText();
-        }
+        UIManager.codeEditorInstance.rewriteCleanCodeText();
     }
 }
