@@ -3,6 +3,7 @@ package com.aviv871.edu.Lang871.UI;
 import com.aviv871.edu.Lang871.LangMain;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.text.AbstractDocument;
 import java.awt.*;
 import java.awt.datatransfer.DataFlavor;
@@ -114,7 +115,6 @@ public class ProgramFrame extends JFrame
         buttonLoad.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
-                UIManager.codeEditorInstance.clearTheTextArea();
                 UIManager.codeEditorInstance.loadCodeFile(openFile());
             }
         });
@@ -140,8 +140,6 @@ public class ProgramFrame extends JFrame
             @Override
             public synchronized void drop(DropTargetDropEvent event)
             {
-                UIManager.codeEditorInstance.clearTheTextArea();
-
                 try
                 {
                     event.acceptDrop(DnDConstants.ACTION_COPY);
@@ -170,6 +168,7 @@ public class ProgramFrame extends JFrame
     private static File openFile()
     {
         JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setFileFilter(new FileNameExtensionFilter("Lang871 Code Files", "871")); // Setting file type filter
         fileChooser.setCurrentDirectory(new File("C:\\Users\\גלעד\\Desktop\\אביב\\מסמכים\\תכנות\\Java\\src\\com\\aviv871\\edu\\Lang871")); // TODO: change to desktop and save the last location the user used
 
         if(fileChooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION)

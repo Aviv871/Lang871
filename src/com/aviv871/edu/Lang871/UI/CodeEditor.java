@@ -1,6 +1,7 @@
 package com.aviv871.edu.Lang871.UI;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.io.*;
 import java.util.ArrayList;
@@ -15,6 +16,8 @@ public class CodeEditor extends UITextArea
 
     public void loadCodeFile(File file)
     {
+        if(file == null) return;
+        clearTheTextArea();
         codeFile = file;
 
         List<String> codeList = readFile(codeFile);
@@ -75,12 +78,18 @@ public class CodeEditor extends UITextArea
     public void saveFileAs()
     {
         JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setFileFilter(new FileNameExtensionFilter("Lang871 Code Files", "871")); // Setting file type filter
+        fileChooser.setSelectedFile(new File("קוד.871")); // Setting suggested file name
         fileChooser.setCurrentDirectory(new File("C:\\Users\\גלעד\\Desktop\\אביב\\מסמכים\\תכנות\\Java\\src\\com\\aviv871\\edu\\Lang871")); // TODO: change to desktop and save the last location the user used
 
         if(fileChooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION)
         {
-            writeToFile(fileChooser.getSelectedFile());
-            codeFile = fileChooser.getSelectedFile();
+            File file;
+            if(!fileChooser.getSelectedFile().getName().endsWith(".871")) file = new File(fileChooser.getSelectedFile() + ".871");
+            else file = fileChooser.getSelectedFile();
+
+            writeToFile(file);
+            codeFile = file;
         }
     }
 
