@@ -40,7 +40,10 @@ public class CodeEditor extends UITextArea
         List<String> records = new ArrayList<>();
         try
         {
-            BufferedReader reader = new BufferedReader(new FileReader(file));
+            FileInputStream inputStream = new FileInputStream(file); // Open a file reader object
+            InputStreamReader inputStreamReader = new InputStreamReader(inputStream, "UTF8"); // Wrap the file reader with InputStreamReader with UTF8 encoding
+            BufferedReader reader = new BufferedReader(inputStreamReader); // Wrap it with buffered reader
+
             String line;
             while ((line = reader.readLine()) != null)
             {
@@ -61,20 +64,7 @@ public class CodeEditor extends UITextArea
     {
         if(codeFile != null)
         {
-            try
-            {
-                PrintWriter writer = new PrintWriter(codeFile);
-                for(String line: getTheCode())
-                {
-                    writer.println(line);
-                }
-                writer.close();
-            }
-            catch(IOException e)
-            {
-                UIManager.consoleInstance.printErrorMessage("שגיאה במהלך הניסיון לשמור את קובץ הקוד");
-                e.printStackTrace();
-            }
+            writeToFile(codeFile);
         }
         else
         {
@@ -89,20 +79,30 @@ public class CodeEditor extends UITextArea
 
         if(fileChooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION)
         {
-            try
+            writeToFile(fileChooser.getSelectedFile());
+            codeFile = fileChooser.getSelectedFile();
+        }
+    }
+
+    private void writeToFile(File file)
+    {
+        try
+        {
+            FileOutputStream outputStream = new FileOutputStream(file); // Open a file writer object
+            OutputStreamWriter streamWriter = new OutputStreamWriter(outputStream, "UTF8"); // Wrap the file writer with OutputStreamWriter with UTF8 encoding
+            BufferedWriter writer = new BufferedWriter(streamWriter); // Wrap it with buffered writer
+
+            for(String line: getTheCode())
             {
-                PrintWriter writer = new PrintWriter(fileChooser.getSelectedFile());
-                for(String line: getTheCode())
-                {
-                    writer.println(line);
-                }
-                writer.close();
+                writer.write(line);
+                writer.newLine();
             }
-            catch(IOException e)
-            {
-                UIManager.consoleInstance.printErrorMessage("שגיאה במהלך הניסיון לקרוא את הקובץ קוד");
-                e.printStackTrace();
-            }
+            writer.close();
+        }
+        catch(IOException e)
+        {
+            UIManager.consoleInstance.printErrorMessage("שגיאה במהלך הניסיון לשמור את הקובץ קוד");
+            e.printStackTrace();
         }
     }
 
