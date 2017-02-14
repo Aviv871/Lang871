@@ -13,14 +13,16 @@ public class Interpreter
 {
     private static final String CODE_BLOCK_END_KEY_WORD = "סוף";
 
-    private static List<String> theCurrentCode;
-    private static ArrayList<Integer> cutedCodeLines = new ArrayList<>();
+    private static List<String> theCurrentCode; // All the code file that we what to interpret in lines
+    private static ArrayList<Integer> cutedCodeLines = new ArrayList<>(); // "Black List" - code lines we need to ignore while running the code
 
     public static void sendCodeToInterpret(List<String> code)
     {
+        // Initializing
         cutedCodeLines.clear();
         theCurrentCode = code;
 
+        // Code handling
         scanForFunctions();
 
         for(int i = 0; i < theCurrentCode.size(); i++)
@@ -28,6 +30,7 @@ public class Interpreter
             if(!cutedCodeLines.contains(i + 1)) initiateLine(theCurrentCode.get(i), i + 1);
         }
 
+        // Logging
         UIManager.consoleInstance.printLogMessage("\n" + "משתנים:" + "\n" + Variable.variables.toString()); // For debugging only!
         UIManager.consoleInstance.printLogMessage("\n" + "פונקציות:" + "\n" + Function.getFunctionsNames()); // For debugging only!
         LangMain.cleanPreviousData();
@@ -36,7 +39,7 @@ public class Interpreter
     public static void initiateLine(String line, int lineNumber)
     {
         if(line.isEmpty()) return;
-        while(line.startsWith(" ") || line.startsWith("\t")) line = line.substring(1, line.length()); // Removing whitespaces in the beginning of the line
+        while(line.startsWith(" ") || line.startsWith("\t")) line = line.substring(1, line.length()); // Removing whitespaces and tabs in the beginning of the line
 
         for(LangKeyWords keyWord: LangKeyWords.values()) // Commands
         {
@@ -87,6 +90,7 @@ public class Interpreter
 
     public static CodeBlock cutCodeBlock(int startLine)
     {
+        // startLine and cutedCodeLines number are like the user see, start in 1, while theCurrentCode line numbers are starting from 0
         for(int i = startLine; i < theCurrentCode.size() + 1; i++)
         {
             if(theCurrentCode.get(i - 1).replaceAll("\\s","").equals(CODE_BLOCK_END_KEY_WORD))

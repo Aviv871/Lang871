@@ -4,9 +4,9 @@ import com.aviv871.edu.Lang871.UI.UIManager;
 
 public class Print implements ICommand
 {
-    private void initiateCommand(String val)
+    protected void initiateCommand(String val)
     {
-        UIManager.consoleInstance.println(val);
+        UIManager.consoleInstance.print(val);
     }
 
     @Override

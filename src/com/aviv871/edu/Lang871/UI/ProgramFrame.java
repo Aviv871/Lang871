@@ -16,9 +16,6 @@ import java.io.File;
 
 public class ProgramFrame extends JFrame
 {
-    private static JTextPane consoleArea;
-    private static JTextPane codeArea;
-
     private static JButton buttonStart = new JButton("הרץ קוד");
     private static JButton buttonClear = new JButton("נקה פלט");
     private static JButton buttonLoad = new JButton("בחר קובץ");
@@ -32,14 +29,28 @@ public class ProgramFrame extends JFrame
     {
         super("Lang871 Interpreter");
 
-        consoleArea = new JTextPane();
+        // Setting the text areas
+        JTextPane consoleArea = new JTextPane();
         consoleArea.setEditable(false);
         consoleArea.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
         UIManager.consoleInstance.setTextArea(consoleArea);
 
-        codeArea = new JTextPane();
+        JTextPane codeArea = new JTextPane();
         codeArea.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
         UIManager.codeEditorInstance.setTextArea(codeArea);
+
+        // Setting the fonts - font, font style, font size
+        Font bold14 = new Font(Font.SANS_SERIF, 1, 14);
+        Font reg14 = new Font(Font.SANS_SERIF, 0, 14);
+        codeHead.setFont(bold14);
+        consoleHead.setFont(bold14);
+        buttonStart.setFont(bold14);
+        buttonClear.setFont(bold14);
+        buttonLoad.setFont(bold14);
+        buttonSave.setFont(bold14);
+        buttonSaveAs.setFont(bold14);
+        consoleArea.setFont(reg14);
+        codeArea.setFont(reg14);
 
         // Setting the code editor document filter
         AbstractDocument document = (AbstractDocument) codeArea.getDocument();
@@ -70,7 +81,7 @@ public class ProgramFrame extends JFrame
         constraints.gridy = 1;
         add(buttonSaveAs, constraints);
 
-        // Text Areas
+        // Text Areas position and placing
         constraints.gridx = 2;
         constraints.gridy = 2;
         add(codeHead, constraints);
@@ -79,7 +90,7 @@ public class ProgramFrame extends JFrame
         constraints.gridy = 3;
         add(consoleHead, constraints);
 
-        // Scroll
+        // Scrolls
         JScrollPane scrollPane = new JScrollPane(codeArea);
         scrollPane.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
         constraints.gridx = 0;
@@ -161,8 +172,8 @@ public class ProgramFrame extends JFrame
         //codeArea.getDocument().addDocumentListener(new CodeListener());
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(800, 600);
-        setLocationRelativeTo(null);    // centers on screen
+        setSize(900, 700); // Set the default window size
+        setLocationRelativeTo(null); // Centers on screen
     }
 
     private static File openFile()
