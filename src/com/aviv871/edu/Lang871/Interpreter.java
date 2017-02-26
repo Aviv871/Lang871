@@ -4,7 +4,7 @@ import com.aviv871.edu.Lang871.Commands.Function;
 import com.aviv871.edu.Lang871.Commands.Variable;
 import com.aviv871.edu.Lang871.References.LangKeyWords;
 import com.aviv871.edu.Lang871.UI.UIManager;
-import com.aviv871.edu.Lang871.Utilities.CodeBlock;
+import com.aviv871.edu.Lang871.CodeBlocks.CodeBlock;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +12,8 @@ import java.util.List;
 public class Interpreter
 {
     private static final String CODE_BLOCK_END_KEY_WORD = "סוף";
+
+    public static CodeBlock runningCodeBlock = null;
 
     private static List<String> theCurrentCode; // All the code file that we what to interpret in lines
     private static ArrayList<Integer> cutedCodeLines = new ArrayList<>(); // "Black List" - code lines we need to ignore while running the code
@@ -31,7 +33,7 @@ public class Interpreter
         }
 
         // Logging
-        UIManager.consoleInstance.printLogMessage("\n" + "משתנים:" + "\n" + Variable.variables.toString()); // For debugging only!
+        UIManager.consoleInstance.printLogMessage("\n" + "משתנים:" + "\n" + Variable.globalVariables.toString()); // For debugging only!
         UIManager.consoleInstance.printLogMessage("\n" + "פונקציות:" + "\n" + Function.getFunctionsNames()); // For debugging only!
         LangMain.cleanPreviousData();
     }

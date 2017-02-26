@@ -24,7 +24,7 @@ public class BooleanExpressionSolver extends ExpressionSolver
     // The Grammar:
     // Expression = term || expression `&&` term || expression `||` term
     // Term = factor || term `==` factor || term `<` factor ....
-    // Factor = (` expression `)` || number || string || boolean || variables || true\false
+    // Factor = (` expression `)` || number || string || boolean || globalVariables || true\false
 
     private boolean parseExpression_Boolean()
     {
@@ -47,7 +47,7 @@ public class BooleanExpressionSolver extends ExpressionSolver
 
     private boolean parseTerm_Boolean()
     {
-        if(parseBooleanFactor()) return tempValueHolder; // Check for boolean variables, word and parentheses
+        if(parseBooleanFactor()) return tempValueHolder; // Check for boolean globalVariables, word and parentheses
         if(parseStringComparison()) return tempValueHolder; // Check for string == string or !=
 
         double x = parseExpression_Numbers();

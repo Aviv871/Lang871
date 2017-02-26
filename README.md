@@ -7,6 +7,7 @@ This is an interpreter for the Lang871 hebrew language. The interpreter is writt
 
 ### Supported Functions 
 * Print - ___ הדפס
+* Print line - ___ הדפסש
 * Variable defining - ___ = ___ הגדר
 * If conditions - ___ אם ___ אז
 
@@ -41,8 +42,8 @@ This is an interpreter for the Lang871 hebrew language. The interpreter is writt
 * >		- greater than (numbers)
 * >=	- greater than or equal to (numbers)
 * <=	- less than or equal to (numbers)
-* OR	- logical or (booleans)
-* AND	- logical and (booleans)
+* &&	- logical or (booleans)
+* ||	- logical and (booleans)
 
 Supported Platforms
 -------------------

@@ -2,7 +2,7 @@ package com.aviv871.edu.Lang871.Commands;
 
 import com.aviv871.edu.Lang871.Interpreter;
 import com.aviv871.edu.Lang871.UI.UIManager;
-import com.aviv871.edu.Lang871.Utilities.CodeBlock;
+import com.aviv871.edu.Lang871.CodeBlocks.CodeBlock;
 
 import java.util.HashMap;
 import java.util.Set;

@@ -22,19 +22,19 @@ public class VariableUpdate implements ICommand
 
         if(varValue.startsWith("\"") && varValue.endsWith("\"") && varValue.length() != 1) // String
         {
-            Variable.variables.replace(varName, varValue.substring(1, varValue.length()-1));
+            Variable.globalVariables.replace(varName, varValue.substring(1, varValue.length()-1));
             return;
         }
 
 
         else if(varValue.equals("אמת")) // Boolean True
         {
-            Variable.variables.replace(varName, true);
+            Variable.globalVariables.replace(varName, true);
             return;
         }
         else if(varValue.equals("שקר")) // Boolean False
         {
-            Variable.variables.replace(varName, false);
+            Variable.globalVariables.replace(varName, false);
             return;
         }
 
@@ -43,11 +43,11 @@ public class VariableUpdate implements ICommand
         {
             if(varValue.equals(name))
             {
-                Variable.variables.replace(varName, Variable.getAVariableValue(varValue));
+                Variable.globalVariables.replace(varName, Variable.getAVariableValue(varValue));
                 return;
             }
         }
 
-        Variable.variables.replace(varName, new NumberExpressionSolver(varValue, line).getResult()); // If not number this check for boolean as well
+        Variable.globalVariables.replace(varName, new NumberExpressionSolver(varValue, line).getResult()); // If not number this check for boolean as well
     }
 }

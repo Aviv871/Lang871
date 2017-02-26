@@ -40,8 +40,8 @@ public class ProgramFrame extends JFrame
         UIManager.codeEditorInstance.setTextArea(codeArea);
 
         // Setting the fonts - font, font style, font size
-        Font bold14 = new Font(Font.SANS_SERIF, 1, 14);
-        Font reg14 = new Font(Font.SANS_SERIF, 0, 14);
+        Font bold14 = new Font("Arial Hebrew", 1, 14);
+        Font reg14 = new Font("Arial Hebrew", 0, 14);
         codeHead.setFont(bold14);
         consoleHead.setFont(bold14);
         buttonStart.setFont(bold14);

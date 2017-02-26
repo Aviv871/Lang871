@@ -18,7 +18,7 @@ public class LangMain
 
     public static void cleanPreviousData()
     {
-        Variable.variables.clear();
+        Variable.globalVariables.clear();
         Function.functions.clear();
     }
 }
