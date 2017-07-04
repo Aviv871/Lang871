@@ -32,18 +32,18 @@ This is an interpreter for the Lang871 hebrew language. The interpreter is writt
   - Example: (טנגנס(0 
 
 ### Supported Operations
-* +	 	- addition  (numbers, string concatenation)
-* -		- subtraction (numbers)
-* /		- divide (numbers)
-* *		- multiply (numbers)
-* ==	- equal (numbers, strings)
-* !=	- not equal to (numbers, strings)
-* <		- less than (numbers)
-* >		- greater than (numbers)
-* >=	- greater than or equal to (numbers)
-* <=	- less than or equal to (numbers)
-* &&	- logical or (booleans)
-* ||	- logical and (booleans)
+* '+'	 	- addition  (numbers, string concatenation)
+* '-'		- subtraction (numbers)
+* '/'		- divide (numbers)
+* '*'		- multiply (numbers)
+* '=='	- equal (numbers, strings)
+* '!='	- not equal to (numbers, strings)
+* '<'		- less than (numbers)
+* '>'		- greater than (numbers)
+* '>='	- greater than or equal to (numbers)
+* '<='	- less than or equal to (numbers)
+* '&&'	- logical or (booleans)
+* '||'	- logical and (booleans)
 
 Supported Platforms
 -------------------

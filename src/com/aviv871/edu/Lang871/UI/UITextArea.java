@@ -1,6 +1,5 @@
 package com.aviv871.edu.Lang871.UI;
 
-import com.aviv871.edu.Lang871.Commands.Variable;
 import com.aviv871.edu.Lang871.LangMain;
 
 import javax.swing.*;

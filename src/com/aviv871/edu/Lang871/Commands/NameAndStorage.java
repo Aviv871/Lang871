@@ -8,10 +8,10 @@ public abstract class NameAndStorage
 {
     protected static boolean isNameValid(String name)
     {
-        if((name.charAt(0) < 'א' || name.charAt(0) > 'ת') && name.charAt(0) != '_' && name.charAt(0) != '-') return false;
+        if((name.charAt(0) < 'א' || name.charAt(0) > 'ת') && name.charAt(0) != '_') return false;
         for(char c: name.toCharArray())
         {
-            if((c < 'א' || c > 'ת') && (c < '0' || c > '9') && c != '_' && c != '-') return false;
+            if((c < 'א' || c > 'ת') && (c < '0' || c > '9') && c != '_') return false;
         }
 
         for(LangKeyWords keyWord: LangKeyWords.values()) // Command names that are already taken

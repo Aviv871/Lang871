@@ -40,8 +40,8 @@ public class Console extends UITextArea
         throw new RuntimeException();
     }
 
-    public void printLogMessage(String error) throws RuntimeException
+    public void printLogMessage(String message) throws RuntimeException
     {
-        appendToPane(error + "\n", Color.BLUE);
+        appendToPane(message + "\n", Color.BLUE);
     }
 }

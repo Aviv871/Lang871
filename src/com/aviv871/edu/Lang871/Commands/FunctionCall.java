@@ -13,6 +13,6 @@ public class FunctionCall implements ICommand
 
         /* CodeBlock function = new CodeBlock(Function.functions.get(par).getCode(), Function.functions.get(par).getStartLineNumber()); // Creates another instance - necessary for recursion
         function.initiateCode(); */
-        Function.functions.get(par).initiateCode();
+        Function.functions.get(par).duplicate().initiateCode();
     }
 }
