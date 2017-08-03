@@ -9,11 +9,6 @@ public class UIManager
 
     public static void openUI()
     {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new ProgramFrame().setVisible(true);
-            }
-        });
+        SwingUtilities.invokeLater(() -> new ProgramFrame().setVisible(true));
     }
 }

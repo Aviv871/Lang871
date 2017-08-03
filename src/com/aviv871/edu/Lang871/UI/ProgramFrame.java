@@ -3,8 +3,13 @@ package com.aviv871.edu.Lang871.UI;
 import com.aviv871.edu.Lang871.LangMain;
 
 import javax.swing.*;
+import javax.swing.event.UndoableEditEvent;
+import javax.swing.event.UndoableEditListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.text.AbstractDocument;
+import javax.swing.undo.CannotRedoException;
+import javax.swing.undo.CannotUndoException;
+import javax.swing.undo.UndoManager;
 import java.awt.*;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.dnd.DnDConstants;
@@ -24,6 +29,8 @@ public class ProgramFrame extends JFrame
 
     private static JLabel codeHead = new JLabel("קוד:");
     private static JLabel consoleHead = new JLabel("פלט:");
+
+    private final UndoManager undo = new UndoManager(); //instantiate an UndoManager
 
     public ProgramFrame()
     {
@@ -167,6 +174,46 @@ public class ProgramFrame extends JFrame
                 }
             }
         });
+
+        // Undo & Redo Handling
+        codeArea.getDocument().addUndoableEditListener(evt -> undo.addEdit(evt.getEdit()));
+        // Undo Handling
+        codeArea.getActionMap().put("Undo", new AbstractAction("Undo") {
+            @Override
+            public void actionPerformed(ActionEvent event) {
+                try
+                {
+                    if (undo.canUndo())
+                    {
+                        undo.undo();
+                    }
+                }
+                catch (CannotUndoException e)
+                {
+                    UIManager.consoleInstance.printErrorMessage("לא מצליח לבטל מהלך אחרון");
+                }
+            }
+        });
+        codeArea.getInputMap().put(KeyStroke.getKeyStroke("control Z"), "Undo");
+        // Redo Handling
+        codeArea.getActionMap().put("Redo", new AbstractAction("Redo") {
+            @Override
+            public void actionPerformed(ActionEvent event) {
+                try
+                {
+                    if (undo.canRedo())
+                    {
+                        undo.redo();
+                    }
+                }
+                catch (CannotRedoException e)
+                {
+                    UIManager.consoleInstance.printErrorMessage("לא מצליח לשחזר מהלך אחרון");
+                }
+            }
+        });
+        codeArea.getInputMap().put(KeyStroke.getKeyStroke("control Y"), "Redo");
+
 
         // Adds event handler for the code editor
         //codeArea.getDocument().addDocumentListener(new CodeListener());
