@@ -7,8 +7,10 @@ import com.aviv871.edu.Lang871.Utilities.BooleanExpressionSolver;
 public class If implements ICommand
 {
     @Override
-    public void sendParameters(String par, int lineNumber)
+    public void sendParameters(String par, int lineNumber, boolean preRun)
     {
+        if(preRun) UIManager.consoleInstance.printErrorMessage("שגיאה בשורה: " + lineNumber, lineNumber);
+
         while(par.endsWith(" ")) par = par.substring(0, par.length()-1); // Removing whitespaces in the end of the line
 
         if(!par.contains(" אז ")) UIManager.consoleInstance.printErrorMessage("שגיאה עם הפרמטרים של הפקודה, חסר 'אז' בשורה: " + lineNumber, lineNumber);

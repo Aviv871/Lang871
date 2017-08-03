@@ -12,8 +12,10 @@ public class Function extends NameAndStorage implements ICommand
     public static HashMap<String, CodeBlock> functions = new HashMap<>();
 
     @Override
-    public void sendParameters(String par, int line)
+    public void sendParameters(String par, int line, boolean preRun)
     {
+        if(!preRun) UIManager.consoleInstance.printErrorMessage("שגיאה בשורה: " + line, line);
+
         par = par.replaceAll("\\s",""); // Remove all whitespaces
         int dotsCounter = 0;
         for(char c: par.toCharArray())
@@ -25,7 +27,7 @@ public class Function extends NameAndStorage implements ICommand
         if(!par.substring(par.indexOf(":") + 1).isEmpty()) UIManager.consoleInstance.printErrorMessage("שגיאה עם הפרמטרים של הפקודה, קטע לא צפוי לאחר נקודותיים בשורה: " + line, line);
         if(!isNameValid(fucName)) UIManager.consoleInstance.printErrorMessage("שגיאה עם הפרמטרים של הפקודה, שם הפונקציה לא חוקי בשורה: " + line, line); // Make sure there is at least one '='
 
-        CodeBlock codeBlock = Interpreter.cutCodeBlock(line + 1);
+        CodeBlock codeBlock = Interpreter.cutCodeBlock(line + 1, true);
         if(codeBlock == null) UIManager.consoleInstance.printErrorMessage("שגיאה עם המבנה של הפונקציה, חסר 'סוף', לפונקציה בשורה: " + line, line);
 
         functions.put(fucName, codeBlock);

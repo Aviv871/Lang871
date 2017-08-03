@@ -5,11 +5,24 @@ Overview
 --------
 This is an interpreter for the Lang871 hebrew language. The interpreter is written in pure Java. It can parse any mathematical or logical expression and returns a result. An expression can contain variables that can be supplied before the expression is executed and the result returned. 
 
-### Supported Functions 
+### Supported Commands 
 * Print - ___ הדפס
 * Print line - ___ הדפסש
 * Variable defining - ___ = ___ הגדר
+* Variable resetting - ___ = ___ הצב or just ___ = ___
 * If conditions - ___ אם ___ אז
+* Functions - 
+	- Setting function:
+	:___ פונקציה
+	command..
+	command..
+	סוף
+	- Calling function: ___ הפעל or just ___
+* While loop -
+	:___ בעוד
+	command..
+	command..
+	סוף
 
 ### Supported data types
 * Number

@@ -12,8 +12,10 @@ public class Variable extends NameAndStorage implements ICommand
     public static HashMap<String, Object> globalVariables = new HashMap<>();
 
     @Override
-    public void sendParameters(String par, int line)
+    public void sendParameters(String par, int line, boolean preRun)
     {
+        if(preRun) UIManager.consoleInstance.printErrorMessage("שגיאה בשורה: " + line, line);
+
         par = par.replaceAll("\\s",""); // Remove all whitespaces
         int eqCounter = 0;
         for(char c: par.toCharArray())

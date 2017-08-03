@@ -11,7 +11,8 @@ public enum LangKeyWords
     VARIABLE_POST(new VariableUpdate(), "הצב"),
     IF(new If(), "אם"),
     FUNCTION(new Function(), "פונקציה"),
-    FUNCTION_CALL(new FunctionCall(), "הפעל");
+    FUNCTION_CALL(new FunctionCall(), "הפעל"),
+    WHILE(new While(), "בעוד");
 
     private ICommand command;
     private String code871;

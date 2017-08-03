@@ -10,8 +10,10 @@ public class Print implements ICommand
     }
 
     @Override
-    public void sendParameters(String par, int line)
+    public void sendParameters(String par, int line, boolean preRun)
     {
+        if(preRun) UIManager.consoleInstance.printErrorMessage("שגיאה בשורה: " + line, line);
+
         while(par.endsWith(" ")) par = par.substring(0, par.length()-1); // Removing whitespaces in the end of the line
 
         if(par.startsWith("\"") && par.endsWith("\"")) // Quote

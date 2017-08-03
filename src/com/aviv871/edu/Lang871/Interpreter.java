@@ -25,7 +25,7 @@ public class Interpreter
         theCurrentCode = code;
 
         // Code handling
-        scanForFunctions();
+        scanForCodeBlocks();
 
         for(int i = 0; i < theCurrentCode.size(); i++)
         {
@@ -48,7 +48,7 @@ public class Interpreter
             if(line.startsWith(keyWord.get871Code() + " "))
             {
                 line = line.substring(keyWord.get871Code().length() + 1); // Cutting the command part from the line and leaving only the parameters
-                keyWord.getCommand().sendParameters(line, lineNumber);
+                keyWord.getCommand().sendParameters(line, lineNumber, false);
                 return;
             }
         }
@@ -57,7 +57,7 @@ public class Interpreter
         {
             if(line.startsWith(varName))
             {
-                LangKeyWords.VARIABLE_POST.getCommand().sendParameters(line, lineNumber);
+                LangKeyWords.VARIABLE_POST.getCommand().sendParameters(line, lineNumber, false);
                 return;
             }
         }
@@ -66,7 +66,7 @@ public class Interpreter
         {
             if(line.startsWith(funcName))
             {
-                LangKeyWords.FUNCTION_CALL.getCommand().sendParameters(line, lineNumber);
+                LangKeyWords.FUNCTION_CALL.getCommand().sendParameters(line, lineNumber, false);
                 return;
             }
         }
@@ -74,7 +74,7 @@ public class Interpreter
         UIManager.consoleInstance.printErrorMessage("שגיאה עם הפקודה בשורה: " + lineNumber, lineNumber);
     }
 
-    private static void scanForFunctions()
+    private static void scanForCodeBlocks()
     {
         int lineNumber = 0;
 
@@ -85,12 +85,17 @@ public class Interpreter
             if(line.startsWith(LangKeyWords.FUNCTION.get871Code() + " ") && !cutedCodeLines.contains(lineNumber))
             {
                 line = line.substring(LangKeyWords.FUNCTION.get871Code().length() + 1); // Cutting the command part from the line and leaving only the parameters
-                LangKeyWords.FUNCTION.getCommand().sendParameters(line, lineNumber);
+                LangKeyWords.FUNCTION.getCommand().sendParameters(line, lineNumber, true);
+            }
+            else if(line.startsWith(LangKeyWords.WHILE.get871Code() + " ") && !cutedCodeLines.contains(lineNumber))
+            {
+                line = line.substring(LangKeyWords.WHILE.get871Code().length() + 1); // Cutting the command part from the line and leaving only the parameters
+                LangKeyWords.WHILE.getCommand().sendParameters(line, lineNumber, true);
             }
         }
     }
 
-    public static CodeBlock cutCodeBlock(int startLine)
+    public static CodeBlock cutCodeBlock(int startLine, boolean cutTheNameLine)
     {
         // startLine and cutedCodeLines number are like the user see, start in 1, while theCurrentCode line numbers are starting from 0
         for(int i = startLine; i < theCurrentCode.size() + 1; i++)
@@ -105,7 +110,7 @@ public class Interpreter
                     cutedCodeLines.add(j);
                 }
 
-                cutedCodeLines.add(startLine - 1); // The function name line
+                if(cutTheNameLine) cutedCodeLines.add(startLine - 1); // The function name line
                 cutedCodeLines.add(j); // The CODE_BLOCK_END_KEY_WORD line
                 return new CodeBlock(block, startLine);
             }

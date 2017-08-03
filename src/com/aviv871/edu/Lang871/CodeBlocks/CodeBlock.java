@@ -47,7 +47,7 @@ public class CodeBlock
         }
 
         cleanLocalVariables(this.localVariables); // Deleting the local variable from the "globalVariables" hashMap
-        localVariables.clear();
+        localVariables.clear(); //TODO: delete!
 
         ///
         if(!inRecursion) Interpreter.runningCodeBlock = null;
