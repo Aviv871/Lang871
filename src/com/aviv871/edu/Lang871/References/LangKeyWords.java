@@ -12,7 +12,8 @@ public enum LangKeyWords
     IF(new If(), "אם"),
     FUNCTION(new Function(), "פונקציה"),
     FUNCTION_CALL(new FunctionCall(), "הפעל"),
-    WHILE(new While(), "בעוד");
+    WHILE(new While(), "בעוד"),
+    FOR(new For(), "עבור");
 
     private ICommand command;
     private String code871;
