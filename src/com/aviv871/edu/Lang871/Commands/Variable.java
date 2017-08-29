@@ -18,9 +18,12 @@ public class Variable extends NameAndStorage implements ICommand
 
         par = par.replaceAll("\\s",""); // Remove all whitespaces
         int eqCounter = 0;
+        boolean arrayFlag1 = false, arrayFlag2 = false;
         for(char c: par.toCharArray())
         {
             if(c == '=') eqCounter++;
+            else if(c == '}') arrayFlag1 = true;
+            else if(c == '{') arrayFlag2 = true;
         }
         if(eqCounter == 0) UIManager.consoleInstance.printErrorMessage("שגיאה עם הפרמטרים של הפקודה, חסר '=' בשורה: " + line, line); // Make sure there is at least one '='
         String varName = par.substring(0, par.indexOf("="));
@@ -30,6 +33,23 @@ public class Variable extends NameAndStorage implements ICommand
         if(varValue.startsWith("\"") && varValue.endsWith("\"") && varValue.length() != 1) // String
         {
             globalVariables.put(varName, varValue.substring(1, varValue.length()-1));
+            if(Interpreter.runningCodeBlock != null) Interpreter.runningCodeBlock.reportLocalVariable(varName); // In case of local variables
+            return;
+        }
+
+        if(arrayFlag1 && arrayFlag2) // Array creation TODO: add to expression solver + errors trows
+        {
+            varValue = varValue.replaceAll("\\s",""); // Remove all whitespaces
+            varValue = varValue.substring(1, varValue.length()-1); // Remove '{' '}'
+            String[] arrayValues = varValue.split(",");
+
+            Object[] arrayVariable = new Object[arrayValues.length];
+            for(int i = 0; i < arrayVariable.length; i++)
+            {
+                arrayVariable[i] = new NumberExpressionSolver(arrayValues[i], line).getResult();
+            }
+
+            globalVariables.put(varName, arrayVariable);
             if(Interpreter.runningCodeBlock != null) Interpreter.runningCodeBlock.reportLocalVariable(varName); // In case of local variables
             return;
         }

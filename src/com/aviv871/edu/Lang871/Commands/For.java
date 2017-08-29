@@ -24,8 +24,8 @@ public class For implements ICommand
         for(char c: par.toCharArray())
         {
             if(c == ':') dotsCounter++;
-            if(c == ',') commCounter++;
-            if(c == '=') equleCounter++;
+            else if(c == ',') commCounter++;
+            else if(c == '=') equleCounter++;
         }
         if(dotsCounter != 1) UIManager.consoleInstance.printErrorMessage("שגיאה עם הפרמטרים של הפקודה, חסר ':' בשורה: " + line, line); // Make sure there is one ':'
         if(!par.substring(par.indexOf(":") + 1).isEmpty()) UIManager.consoleInstance.printErrorMessage("שגיאה עם הפרמטרים של הפקודה, קטע לא צפוי לאחר נקודותיים בשורה: " + line, line);

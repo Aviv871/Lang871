@@ -27,7 +27,7 @@ public class Print implements ICommand
                 if(par.equals(varName))
                 {
                     Object value = Variable.getAVariableValue(varName);
-                    String printValue;
+                    String printValue = "";
                     if(value instanceof Boolean)
                     {
                         if(value.equals(true))
@@ -37,6 +37,27 @@ public class Print implements ICommand
                         else
                         {
                             printValue = "שקר";
+                        }
+                    }
+                    else if(value instanceof Object[])
+                    {
+                        for(Object a: (Object[]) value)
+                        {
+                            if(a instanceof Boolean)
+                            {
+                                if(a.equals(true))
+                                {
+                                    printValue += "אמת ";
+                                }
+                                else
+                                {
+                                    printValue += "שקר ";
+                                }
+                            }
+                            else
+                            {
+                                printValue += a.toString() + " ";
+                            }
                         }
                     }
                     else
