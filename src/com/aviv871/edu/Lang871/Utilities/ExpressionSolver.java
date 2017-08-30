@@ -111,6 +111,29 @@ public abstract class ExpressionSolver
                         errorFlag = true;
                         return 0;
                     }
+
+                    if(Variable.getAVariableValue(func) instanceof Object[])
+                    {
+                        Object[] theArray = (Object[]) Variable.getAVariableValue(func);
+                        if(dealWithChar('[')) // Parentheses
+                        {
+                            System.out.println("1");
+                            int index = (int) parseExpression_Numbers();
+                            if(!dealWithChar(']')) UIManager.consoleInstance.printErrorMessage("שגיאה עם הפרמטרים של המערך" + " - בשורה " + lineNumber, lineNumber);
+                            if(theArray[index] instanceof Double)
+                            {
+                                System.out.println("2");
+                                x = (double) theArray[index];
+                                return x;
+                            }
+                            else
+                            {
+                                errorFlag = true;
+                                return 0;
+                            }
+                        }
+                    }
+
                     x = (double) Variable.getAVariableValue(func);
                     return x;
                 }

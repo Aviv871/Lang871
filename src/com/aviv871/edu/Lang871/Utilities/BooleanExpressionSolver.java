@@ -84,6 +84,26 @@ public class BooleanExpressionSolver extends ExpressionSolver
                         currentChar = str.charAt(currentPosition);
                         return false;
                     }
+                    else if(Variable.getAVariableValue(word) instanceof Object[])
+                    {
+                        Object[] theArray = (Object[]) Variable.getAVariableValue(word);
+                        if(dealWithChar('[')) // Parentheses
+                        {
+                            int index = (int) parseExpression_Numbers();
+                            dealWithChar(']');
+                            if(theArray[index] instanceof Boolean)
+                            {
+                                tempValueHolder = (boolean) theArray[index];
+                                return true;
+                            }
+                            else
+                            {
+                                currentPosition = startPos;
+                                currentChar = str.charAt(currentPosition);
+                                return false;
+                            }
+                        }
+                    }
 
                     tempValueHolder = (boolean) Variable.getAVariableValue(word);
                     return true;
@@ -153,7 +173,7 @@ public class BooleanExpressionSolver extends ExpressionSolver
             {
                 if(word.equals(varName))
                 {
-                    if(Variable.getAVariableValue(word) instanceof Double || Variable.getAVariableValue(word) instanceof Boolean)
+                    if(Variable.getAVariableValue(word) instanceof Double || Variable.getAVariableValue(word) instanceof Boolean || Variable.getAVariableValue(word) instanceof Object[])
                     {
                         currentPosition = startPos;
                         currentChar = str.charAt(currentPosition);
