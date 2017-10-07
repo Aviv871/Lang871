@@ -13,7 +13,8 @@ public enum LangKeyWords
     FUNCTION(new Function(), "פונקציה"),
     FUNCTION_CALL(new FunctionCall(), "הפעל"),
     WHILE(new While(), "בעוד"),
-    FOR(new For(), "עבור");
+    FOR(new For(), "עבור"),
+    FOR_EACH(new ForEach(), "עבורכל");
 
     private ICommand command;
     private String code871;

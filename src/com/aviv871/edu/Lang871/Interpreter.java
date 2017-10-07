@@ -97,6 +97,11 @@ public class Interpreter
                 line = line.substring(LangKeyWords.FOR.get871Code().length() + 1); // Cutting the command part from the line and leaving only the parameters
                 LangKeyWords.FOR.getCommand().sendParameters(line, lineNumber, true);
             }
+            else if(line.startsWith(LangKeyWords.FOR_EACH.get871Code() + " ") && !cutedCodeLines.contains(lineNumber))
+            {
+                line = line.substring(LangKeyWords.FOR_EACH.get871Code().length() + 1); // Cutting the command part from the line and leaving only the parameters
+                LangKeyWords.FOR_EACH.getCommand().sendParameters(line, lineNumber, true);
+            }
         }
     }
 

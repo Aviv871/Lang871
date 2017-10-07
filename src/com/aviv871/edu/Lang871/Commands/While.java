@@ -40,4 +40,9 @@ public class While implements ICommand
             }
         }
     }
+
+    public static void clearLoopsData()
+    {
+        loops.clear();
+    }
 }
