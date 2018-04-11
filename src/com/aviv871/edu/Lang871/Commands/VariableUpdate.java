@@ -2,6 +2,7 @@ package com.aviv871.edu.Lang871.Commands;
 
 import com.aviv871.edu.Lang871.UI.UIManager;
 import com.aviv871.edu.Lang871.Utilities.NumberExpressionSolver;
+import sun.security.ssl.Debug;
 
 public class VariableUpdate implements ICommand
 {
@@ -54,9 +55,11 @@ public class VariableUpdate implements ICommand
 
         if(arrayFlag3 && arrayFlag4) // One value in the array update
         {
-            int index = Integer.parseInt(varName.substring(varName.indexOf("[")+1, varName.indexOf("]")));
+            //int index = Integer.parseInt(varName.substring(varName.indexOf("[")+1, varName.indexOf("]")));
+            double index = (double) new NumberExpressionSolver(varName.substring(varName.indexOf("[")+1, varName.indexOf("]")), line).getResult();
+            if(index % 1 != 0) UIManager.consoleInstance.printErrorMessage("אינדקס לא חוקי למערך בשורה - " + line, line); // check that it is indeed always int
             Object[] newArray = (Object[]) Variable.getAVariableValue(varName.substring(0, varName.indexOf("[")));
-            newArray[index] = new NumberExpressionSolver(varValue, line).getResult();
+            newArray[(int)index] = new NumberExpressionSolver(varValue, line).getResult();
             Variable.globalVariables.replace(varName.substring(0, varName.indexOf("[")), newArray);
         }
 

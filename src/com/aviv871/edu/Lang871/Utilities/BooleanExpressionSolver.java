@@ -84,12 +84,13 @@ public class BooleanExpressionSolver extends ExpressionSolver
                         currentChar = str.charAt(currentPosition);
                         return false;
                     }
-                    else if(Variable.getAVariableValue(word) instanceof Object[])
+                    else if(Variable.getAVariableValue(word) instanceof Object[]) // Array variable
                     {
                         Object[] theArray = (Object[]) Variable.getAVariableValue(word);
                         if(dealWithChar('[')) // Parentheses
                         {
                             int index = (int) parseExpression_Numbers();
+                            if(index > theArray.length - 1 || index < 0) UIManager.consoleInstance.printErrorMessage("מערך חרג מהתחום" + " - בשורה " + lineNumber, lineNumber);
                             dealWithChar(']');
                             if(theArray[index] instanceof Boolean)
                             {

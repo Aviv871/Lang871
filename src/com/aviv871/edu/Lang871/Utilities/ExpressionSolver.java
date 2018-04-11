@@ -112,13 +112,14 @@ public abstract class ExpressionSolver
                         return 0;
                     }
 
-                    if(Variable.getAVariableValue(func) instanceof Object[])
+                    if(Variable.getAVariableValue(func) instanceof Object[]) // Array variable
                     {
                         Object[] theArray = (Object[]) Variable.getAVariableValue(func);
                         if(dealWithChar('[')) // Parentheses
                         {
                             System.out.println("1");
                             int index = (int) parseExpression_Numbers();
+                            if(index > theArray.length - 1 || index < 0) UIManager.consoleInstance.printErrorMessage("מערך חרג מהתחום" + " - בשורה " + lineNumber, lineNumber);
                             if(!dealWithChar(']')) UIManager.consoleInstance.printErrorMessage("שגיאה עם הפרמטרים של המערך" + " - בשורה " + lineNumber, lineNumber);
                             if(theArray[index] instanceof Double)
                             {

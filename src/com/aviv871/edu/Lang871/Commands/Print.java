@@ -1,6 +1,7 @@
 package com.aviv871.edu.Lang871.Commands;
 
 import com.aviv871.edu.Lang871.UI.UIManager;
+import com.aviv871.edu.Lang871.Utilities.NumberExpressionSolver;
 
 public class Print implements ICommand
 {
@@ -16,7 +17,21 @@ public class Print implements ICommand
 
         while(par.endsWith(" ")) par = par.substring(0, par.length()-1); // Removing whitespaces in the end of the line
 
-        if(par.startsWith("\"") && par.endsWith("\"")) // Quote
+        boolean arrayFlag1 = false, arrayFlag2 = false;
+        for(char c: par.toCharArray())
+        {
+            if(c == '[') arrayFlag1 = true;
+            else if(c == ']') arrayFlag2 = true;
+        }
+
+        if(arrayFlag1 && arrayFlag2) // One value in array
+        {
+            double index = (double) new NumberExpressionSolver(par.substring(par.indexOf("[")+1, par.indexOf("]")), line).getResult();
+            if(index % 1 != 0) UIManager.consoleInstance.printErrorMessage("אינדקס לא חוקי למערך בשורה - " + line, line); // check that it is indeed always int
+            Object[] theArray = (Object[]) Variable.getAVariableValue(par.substring(0, par.indexOf("[")));
+            initiateCommand(theArray[(int)index].toString());
+        }
+        else if(par.startsWith("\"") && par.endsWith("\"")) // Quote
         {
             initiateCommand(par.substring(1, par.length()-1));
         }
@@ -39,7 +54,7 @@ public class Print implements ICommand
                             printValue = "שקר";
                         }
                     }
-                    else if(value instanceof Object[])
+                    else if(value instanceof Object[]) // All array
                     {
                         for(Object a: (Object[]) value)
                         {
