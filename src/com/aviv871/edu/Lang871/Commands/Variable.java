@@ -16,7 +16,7 @@ public class Variable extends NameAndStorage implements ICommand
     {
         if(preRun) UIManager.consoleInstance.printErrorMessage("שגיאה בשורה: " + line, line);
 
-        par = par.replaceAll("\\s",""); // Remove all whitespaces
+        //par = par.replaceAll("\\s",""); // Remove all whitespaces - removing from strings variables too..
         int eqCounter = 0;
         boolean arrayFlag1 = false, arrayFlag2 = false;
         for(char c: par.toCharArray())
@@ -28,8 +28,11 @@ public class Variable extends NameAndStorage implements ICommand
         if(eqCounter == 0) UIManager.consoleInstance.printErrorMessage("שגיאה עם הפרמטרים של הפקודה, חסר '=' בשורה: " + line, line); // Make sure there is at least one '='
         String varName = par.substring(0, par.indexOf("="));
         String varValue = par.substring(par.indexOf("=") + 1);
+        varName = varName.replaceAll("\\s",""); // Remove all whitespaces
         if(!isNameValid(varName)) UIManager.consoleInstance.printErrorMessage("שגיאה עם הפרמטרים של הפקודה, שם משתנה לא חוקי בשורה: " + line, line); // Make sure there is at least one '='
 
+        while(varValue.startsWith(" ")) varValue = varValue.substring(1);
+        while(varValue.endsWith(" ")) varValue = varValue.substring(0, varValue.length()-1);
         if(varValue.startsWith("\"") && varValue.endsWith("\"") && varValue.length() != 1) // String
         {
             globalVariables.put(varName, varValue.substring(1, varValue.length()-1));
@@ -37,9 +40,9 @@ public class Variable extends NameAndStorage implements ICommand
             return;
         }
 
+        varValue = varValue.replaceAll("\\s",""); // Remove all whitespaces
         if(arrayFlag1 && arrayFlag2) // Array creation TODO: add to expression solver + errors trows
         {
-            varValue = varValue.replaceAll("\\s",""); // Remove all whitespaces
             varValue = varValue.substring(1, varValue.length()-1); // Remove '{' '}'
             String[] arrayValues = varValue.split(",");
 
@@ -71,5 +74,28 @@ public class Variable extends NameAndStorage implements ICommand
     public static Object getAVariableValue(String varName)
     {
         return globalVariables.get(varName);
+    }
+
+    public static String globalVariablesLog()
+    {
+        StringBuilder logOutput = new StringBuilder();
+        for(String varKey: globalVariables.keySet())
+        {
+            if(globalVariables.get(varKey) instanceof Object[]) // Array
+            {
+                logOutput.append(varKey);
+            }
+            else
+            {
+                logOutput.append(varKey);
+                logOutput.append("=");
+                logOutput.append(globalVariables.get(varKey).toString());
+            }
+
+            logOutput.append(", ");
+        }
+
+        logOutput.delete(logOutput.length() - 2, logOutput.length() - 1); // Delete last " ,"
+        return logOutput.toString();
     }
 }

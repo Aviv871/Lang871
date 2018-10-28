@@ -33,7 +33,7 @@ public class Interpreter
         }
 
         // Logging
-        UIManager.consoleInstance.printLogMessage("\n" + "משתנים:" + "\n" + Variable.globalVariables.toString()); // For debugging only!
+        UIManager.consoleInstance.printLogMessage("\n" + "משתנים:" + "\n" + Variable.globalVariablesLog()); // For debugging only!
         UIManager.consoleInstance.printLogMessage("\n" + "פונקציות:" + "\n" + Function.getFunctionsNames()); // For debugging only!
         LangMain.cleanPreviousData();
     }

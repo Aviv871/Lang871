@@ -2,7 +2,6 @@ package com.aviv871.edu.Lang871.Commands;
 
 import com.aviv871.edu.Lang871.UI.UIManager;
 import com.aviv871.edu.Lang871.Utilities.NumberExpressionSolver;
-import sun.security.ssl.Debug;
 
 public class VariableUpdate implements ICommand
 {
