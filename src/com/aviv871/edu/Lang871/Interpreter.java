@@ -21,6 +21,7 @@ public class Interpreter
     public static void sendCodeToInterpret(List<String> code)
     {
         // Initializing
+        runningCodeBlock = null;
         cutedCodeLines.clear();
         theCurrentCode = code;
 

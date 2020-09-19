@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Lang871:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Lang871_jar</output-path>
+    <root id="archive" name="Lang871.jar">
+      <element id="module-output" name="Lang871" />
+    </root>
+  </artifact>
+</component>

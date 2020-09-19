@@ -54,6 +54,7 @@ public class UITextArea
         try
         {
             doc.insertString(doc.getLength(), msg, style);
+            textPane.update(textPane.getGraphics());
         }
         catch (BadLocationException e)
         {
