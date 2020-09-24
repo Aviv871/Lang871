@@ -3,7 +3,7 @@ Lang871
 
 Overview
 --------
-This is an interpreter for the Lang871 hebrew language. The interpreter is written in pure Java. It can parse any mathematical or logical expression and returns a result. An expression can contain variables that can be supplied before the expression is executed and the result returned. 
+This is an interpreter for the Lang871 Hebrew language. The interpreter is written in pure Java. It can parse any mathematical or logical expression and returns a result. An expression can contain variables that can be supplied before the expression is executed and the result returned. 
 
 ### Supported Commands 
 * Print - ___ הדפס
@@ -61,8 +61,14 @@ This is an interpreter for the Lang871 hebrew language. The interpreter is writt
 Supported Platforms
 -------------------
 The program was only checked on Windows, but should work
-on any Java suported platform.
+on any Java supported platform.
+
+How to build
+-------------------
+Clone the project locally, open the project folder using IntelliJ IDEA,
+and build the artifacts using Build -> Build Artifacts... -> Build (Lang871:jar)
+
 
 License
 -------
-Licensed under the GNU Geneeal Public License, Version 3.0; everyone is permitted to copy and distribute verbatim copies of this license document, but changing it is not allowed.
+Licensed under the GNU General Public License, Version 3.0; everyone is permitted to copy and distribute verbatim copies of this license document, but changing it is not allowed.
