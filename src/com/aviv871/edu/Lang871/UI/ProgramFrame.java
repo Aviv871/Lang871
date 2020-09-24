@@ -227,7 +227,7 @@ public class ProgramFrame extends JFrame
     {
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setFileFilter(new FileNameExtensionFilter("Lang871 Code Files", "871")); // Setting file type filter
-        fileChooser.setCurrentDirectory(new File("C:\\Users\\גלעד\\Desktop\\אביב\\מסמכים\\תכנות\\Java\\src\\com\\aviv871\\edu\\Lang871")); // TODO: change to desktop and save the last location the user used
+        // TODO: fileChooser.setCurrentDirectory
 
         if(fileChooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION)
         {

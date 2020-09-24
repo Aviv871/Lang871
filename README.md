@@ -60,7 +60,8 @@ This is an interpreter for the Lang871 hebrew language. The interpreter is writt
 
 Supported Platforms
 -------------------
-The supported platform is only Windows right now. 
+The program was only checked on Windows, but should work
+on any Java suported platform.
 
 License
 -------

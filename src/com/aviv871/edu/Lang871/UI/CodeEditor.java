@@ -80,7 +80,7 @@ public class CodeEditor extends UITextArea
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setFileFilter(new FileNameExtensionFilter("Lang871 Code Files", "871")); // Setting file type filter
         fileChooser.setSelectedFile(new File("קוד.871")); // Setting suggested file name
-        fileChooser.setCurrentDirectory(new File("C:\\Users\\גלעד\\Desktop\\אביב\\מסמכים\\תכנות\\Java\\src\\com\\aviv871\\edu\\Lang871")); // TODO: change to desktop and save the last location the user used
+        // TODO: fileChooser.setCurrentDirectory
 
         if(fileChooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION)
         {
