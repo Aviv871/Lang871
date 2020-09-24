@@ -95,7 +95,9 @@ public class Variable extends NameAndStorage implements ICommand
             logOutput.append(", ");
         }
 
-        logOutput.delete(logOutput.length() - 2, logOutput.length() - 1); // Delete last " ,"
+        if (globalVariables.size() > 0) {
+            logOutput.delete(logOutput.length() - 2, logOutput.length() - 1); // Delete last " ,"
+        }
         return logOutput.toString();
     }
 }
